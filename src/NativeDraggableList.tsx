@@ -13,6 +13,6 @@ export interface CustomStyle extends Style {
 
 export class NativeDraggableList extends Component<NativeDraggableListProps<CustomStyle>> {
     render(): ReactNode {
-        return <HelloWorld name={this.props.yourName} style={this.props.style} />;
+        return <HelloWorld name="test" style={this.props.style} />;
     }
 }

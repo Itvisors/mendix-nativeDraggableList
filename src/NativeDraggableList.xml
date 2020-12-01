@@ -8,9 +8,59 @@
     <icon/>
     <properties>
         <propertyGroup caption="General">
-            <property key="yourName" type="string" required="false">
-                <caption>Name</caption>
-                <description>Enter your name</description>
+            <property key="ds" type="datasource" isList="true">
+                <caption>Data source</caption>
+                <description></description>
+            </property>
+            <property key="itemIdAttr" type="attribute" dataSource="ds">
+                <caption>Item ID</caption>
+                <description>Item ID attribute</description>
+                <attributeTypes>
+                    <attributeType name="AutoNumber"/>
+                    <attributeType name="Enum"/>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="itemSeqNbrAttr" type="attribute" dataSource="ds">
+                <caption>Item Seq. Nbr</caption>
+                <description>Item sequence number attribute</description>
+                <attributeTypes>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                </attributeTypes>
+            </property>
+            <property key="content" type="widgets" dataSource="ds">
+                <caption>Content</caption>
+                <description></description>
+            </property>
+        </propertyGroup>
+    
+        <!-- Drop properties -->
+
+        <propertyGroup caption="Drop">
+            <property key="droppedItemIdAttr" type="attribute">
+                <caption>Dropped item ID</caption>
+                <description>Dropped item ID attribute</description>
+                <attributeTypes>
+                    <attributeType name="AutoNumber"/>
+                    <attributeType name="Enum"/>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="dropDataAttr" type="attribute">
+                <caption>Drop data</caption>
+                <description>JSON data containing the new sequence numbers of items in the column the item was dropped on.</description>
+                <attributeTypes>
+                    <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="onDropAction" type="action">
+                <caption>On drop action</caption>
+                <description>Configure the action to handle drops. Use the drop data to update the sequence. Also reset context ID value</description>
             </property>
         </propertyGroup>
     </properties>
