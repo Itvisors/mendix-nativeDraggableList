@@ -13,8 +13,11 @@ export interface NativeDraggableListProps<Style> {
     itemIdAttr: ListAttributeValue<BigJs.Big | string>;
     itemSeqNbrAttr: ListAttributeValue<BigJs.Big>;
     content: ListWidgetValue;
+    dragHandleContent: ListWidgetValue;
     droppedItemIdAttr: EditableValue<BigJs.Big | string>;
     dropDataAttr: EditableValue<string>;
+    dropFromAttr: EditableValue<BigJs.Big>;
+    dropToAttr: EditableValue<BigJs.Big>;
     onDropAction?: ActionValue;
 }
 
@@ -25,7 +28,10 @@ export interface NativeDraggableListPreviewProps {
     itemIdAttr: string;
     itemSeqNbrAttr: string;
     content: { widgetCount: number; renderer: ComponentType };
+    dragHandleContent: { widgetCount: number; renderer: ComponentType };
     droppedItemIdAttr: string;
     dropDataAttr: string;
+    dropFromAttr: string;
+    dropToAttr: string;
     onDropAction: {} | null;
 }

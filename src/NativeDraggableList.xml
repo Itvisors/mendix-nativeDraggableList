@@ -35,6 +35,10 @@
                 <caption>Content</caption>
                 <description></description>
             </property>
+            <property key="dragHandleContent" type="widgets" dataSource="ds">
+                <caption>Drag handle content</caption>
+                <description></description>
+            </property>
         </propertyGroup>
     
         <!-- Drop properties -->
@@ -56,6 +60,20 @@
                 <description>JSON data containing the new sequence numbers of items in the column the item was dropped on.</description>
                 <attributeTypes>
                     <attributeType name="String"/>
+                </attributeTypes>
+            </property>
+            <property key="dropFromAttr" type="attribute">
+                <caption>Drop from</caption>
+                <description>From value of drop data.</description>
+                <attributeTypes>
+                    <attributeType name="Integer"/>
+                </attributeTypes>
+            </property>
+            <property key="dropToAttr" type="attribute">
+                <caption>Drop to</caption>
+                <description>To value of drop data.</description>
+                <attributeTypes>
+                    <attributeType name="Integer"/>
                 </attributeTypes>
             </property>
             <property key="onDropAction" type="action">

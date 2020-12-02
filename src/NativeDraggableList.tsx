@@ -1,18 +1,45 @@
 import { Component, ReactNode, createElement } from "react";
-import { TextStyle, ViewStyle } from "react-native";
+import { ViewStyle } from "react-native";
 
 import { Style } from "@mendix/pluggable-widgets-tools";
 
-import { HelloWorld } from "./components/HelloWorld";
+import { DraggableListContainer } from "./components/DraggableListContainer";
 import { NativeDraggableListProps } from "../typings/NativeDraggableListProps";
+import { ItemDataArray } from "./types/CustomTypes";
 
 export interface CustomStyle extends Style {
     container: ViewStyle;
-    label: TextStyle;
 }
 
 export class NativeDraggableList extends Component<NativeDraggableListProps<CustomStyle>> {
+    constructor(props: NativeDraggableListProps<CustomStyle>) {
+        super(props);
+
+        this.onDragEnd = this.onDragEnd.bind(this);
+    }
+
+    onDragEnd = (itemArray: ItemDataArray, from: number, to: number): void => {
+        console.info(
+            "NativeDraggableList onDragEnd, from: " +
+                from +
+                ", to: " +
+                to +
+                ", item array: " +
+                JSON.stringify(itemArray)
+        );
+    };
+
     render(): ReactNode {
-        return <HelloWorld name="test" style={this.props.style} />;
+        return (
+            <DraggableListContainer
+                ds={this.props.ds}
+                itemIdAttr={this.props.itemIdAttr}
+                itemSeqNbrAttr={this.props.itemSeqNbrAttr}
+                content={this.props.content}
+                dragHandleContent={this.props.dragHandleContent}
+                style={this.props.style}
+                onDragEnd={this.onDragEnd}
+            />
+        );
     }
 }
