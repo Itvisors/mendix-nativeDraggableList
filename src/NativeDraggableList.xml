@@ -44,17 +44,6 @@
         <!-- Drop properties -->
 
         <propertyGroup caption="Drop">
-            <property key="droppedItemIdAttr" type="attribute">
-                <caption>Dropped item ID</caption>
-                <description>Dropped item ID attribute</description>
-                <attributeTypes>
-                    <attributeType name="AutoNumber"/>
-                    <attributeType name="Enum"/>
-                    <attributeType name="Integer"/>
-                    <attributeType name="Long"/>
-                    <attributeType name="String"/>
-                </attributeTypes>
-            </property>
             <property key="dropDataAttr" type="attribute">
                 <caption>Drop data</caption>
                 <description>JSON data containing the new sequence numbers of items in the column the item was dropped on.</description>
