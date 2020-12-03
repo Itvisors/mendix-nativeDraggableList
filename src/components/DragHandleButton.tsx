@@ -12,11 +12,15 @@ export class DragHandleButton extends Component<DragHandleButtonProps> {
         if (isAndroid) {
             return (
                 <TouchableNativeFeedback onLongPress={() => onStartDrag()}>
-                    <View style={{ height: 70 }}>{children}</View>
+                    <View style={{ height: 50 }}>{children}</View>
                 </TouchableNativeFeedback>
             );
         } else {
-            return <TouchableOpacity onLongPress={() => onStartDrag()}>{children}</TouchableOpacity>;
+            return (
+                <TouchableOpacity style={{ height: 50 }} onPressIn={() => onStartDrag()}>
+                    {children}
+                </TouchableOpacity>
+            );
         }
     }
 }

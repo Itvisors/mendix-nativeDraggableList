@@ -45,7 +45,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         // When one or more items have no id, the list will contain only one item and no datasource items.
         if (!dsItem) {
             return (
-                <View style={{ flexDirection: "row", flex: 1 }}>
+                <View style={{ flexDirection: "row", flex: 1, height: 50 }}>
                     <DragHandleButton onStartDrag={drag}>
                         <Text style={{ color: "red", fontSize: 17, margin: 10 }}>Error</Text>
                     </DragHandleButton>
@@ -56,7 +56,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             );
         }
         return (
-            <View style={{ flexDirection: "row", flex: 1 }}>
+            <View style={{ flexDirection: "row", flex: 1, height: 50 }}>
                 <DragHandleButton onStartDrag={drag}>{dragHandleContent(dsItem)}</DragHandleButton>
                 <View style={{ flex: 1 }}>{content(dsItem)}</View>
             </View>
