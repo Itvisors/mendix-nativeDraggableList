@@ -38,14 +38,15 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
-    renderItem = ({ item, /* index, */ drag /* , isActive */ }: RenderItemParams<ItemData>): ReactNode => {
-        const { dragHandleContent, content } = this.props;
+    renderItem = ({ item, /* index, */ drag, isActive }: RenderItemParams<ItemData>): ReactNode => {
+        const { content, dragHandleContent } = this.props;
         const dsItem = this.dsItemMap.get(item.itemId);
+        console.info("DraggableListContainer.renderItem " + item.itemId + ", active: " + isActive);
         // When one or more items have no id, the list will contain only one item and no datasource items.
         if (!dsItem) {
             return (
                 <View style={{ flexDirection: "row", flex: 1 }}>
-                    <DragHandleButton onPressIn={drag}>
+                    <DragHandleButton onStartDrag={drag}>
                         <Text style={{ color: "red", fontSize: 17, margin: 10 }}>Error</Text>
                     </DragHandleButton>
                     <View style={{ flex: 1 }}>
@@ -56,7 +57,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         }
         return (
             <View style={{ flexDirection: "row", flex: 1 }}>
-                <DragHandleButton onPressIn={drag}>{dragHandleContent(dsItem)}</DragHandleButton>
+                <DragHandleButton onStartDrag={drag}>{dragHandleContent(dsItem)}</DragHandleButton>
                 <View style={{ flex: 1 }}>{content(dsItem)}</View>
             </View>
         );
