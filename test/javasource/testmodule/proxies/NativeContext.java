@@ -20,7 +20,6 @@ public class NativeContext
 	 */
 	public enum MemberNames
 	{
-		DroppedItemID("DroppedItemID"),
 		DropData("DropData"),
 		DropFrom("DropFrom"),
 		DropTo("DropTo");
@@ -110,42 +109,6 @@ public class NativeContext
 	{
 		com.mendix.core.Core.delete(context, getMendixObject());
 	}
-	/**
-	 * @return value of DroppedItemID
-	 */
-	public final java.lang.String getDroppedItemID()
-	{
-		return getDroppedItemID(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of DroppedItemID
-	 */
-	public final java.lang.String getDroppedItemID(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		return (java.lang.String) getMendixObject().getValue(context, MemberNames.DroppedItemID.toString());
-	}
-
-	/**
-	 * Set value of DroppedItemID
-	 * @param droppeditemid
-	 */
-	public final void setDroppedItemID(java.lang.String droppeditemid)
-	{
-		setDroppedItemID(getContext(), droppeditemid);
-	}
-
-	/**
-	 * Set value of DroppedItemID
-	 * @param context
-	 * @param droppeditemid
-	 */
-	public final void setDroppedItemID(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String droppeditemid)
-	{
-		getMendixObject().setValue(context, MemberNames.DroppedItemID.toString(), droppeditemid);
-	}
-
 	/**
 	 * @return value of DropData
 	 */
