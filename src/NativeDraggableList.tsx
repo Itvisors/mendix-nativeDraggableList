@@ -33,10 +33,13 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
             itemArray[itemIndex].seqNbr = itemIndex + 1;
         }
         console.info("NativeDraggableList onDragEnd, adjusted item array: " + JSON.stringify(itemArray));
-        const { dropDataAttr, dropFromAttr, dropToAttr } = this.props;
+        const { dropDataAttr, dropFromAttr, dropToAttr, onDropAction } = this.props;
         dropDataAttr.setValue(JSON.stringify(itemArray));
         dropFromAttr.setTextValue("" + from);
         dropToAttr.setTextValue("" + to);
+        if (onDropAction && onDropAction.canExecute && !onDropAction.isExecuting) {
+            onDropAction.execute();
+        }
     };
 
     render(): ReactNode {
