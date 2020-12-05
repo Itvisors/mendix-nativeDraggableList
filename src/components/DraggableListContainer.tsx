@@ -66,13 +66,17 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
     };
 
     onDragEnd = ({ data, from, to }: DragEndParams<ItemData>): void => {
+        console.info("DraggableListContainer.onDragEnd()");
         this.itemArray = data;
+        // Triggering the onDragEnd prop also triggers several renders because the context attributes are updated.
+        // These renders cause flickering where the item is briefly visible in the old position.
+        // Signal that we have a pending drop.
         this.dropPending = true;
         this.props.onDragEnd(data, from, to);
     };
 
     render(): ReactNode {
-        console.info("DraggableListContainer.render");
+        console.info("DraggableListContainer.render()");
         this.getData();
         return (
             <View style={this.styles.container}>
@@ -93,18 +97,27 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             return;
         }
 
-        if (onDropAction && onDropAction.isExecuting) {
-            console.info("DraggableListContainer.getData(): The on drop action still running, skip reload of the data");
-            return;
-        } else {
+        // If the drop action is running, turn off the pending flag
+        if (this.dropPending && onDropAction && onDropAction.isExecuting) {
+            console.info("DraggableListContainer.getData(): The drop action running now, skip reload of the data");
             this.dropPending = false;
         }
 
+        // If we get here and the drop pending flag is on, this means a render is triggered because of the context attribute update.
+        // The drop action is not yet running.
         if (this.dropPending) {
-            console.info("DraggableListContainer.getData(): The on drop action is pending, skip reload of the data");
+            console.info("DraggableListContainer.getData(): The drop action is pending, skip reload of the data");
             return;
         }
 
+        // The drop action is still running
+        if (onDropAction && onDropAction.isExecuting) {
+            console.info("DraggableListContainer.getData(): The drop action still running, skip reload of the data");
+            return;
+        }
+
+        // Due to a refresh issue, the datasource data is updated even though the datasource has not yet updated itself.
+        // This means that we see the new sequence numbers but the items are not yet in the required sequence.
         if (!this.checkItemSequence()) {
             console.info("TaskBoard.getData(): The items are not (yet) returned in the right sequence");
             return;
@@ -131,7 +144,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             }
         }
         if (missingId) {
-            console.warn("DraggableListContainer.getData: Invalid data, clear widget data");
+            console.warn("DraggableListContainer.getData(): Invalid data, clear widget data");
             this.dsItemMap.clear();
             this.itemArray = [];
             this.itemArray.push({
@@ -157,10 +170,10 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             const seqNbr = Number(itemSeqNbrAttr(itemObject).value);
             if (seqNbr >= checkSeqNbr) {
                 checkSeqNbr = seqNbr;
-                console.info("DraggableListContainer.checkItemSequence: SeqNbr " + seqNbr + " in sequence");
+                // console.info("DraggableListContainer.checkItemSequence(): SeqNbr " + seqNbr + " in sequence");
             } else {
                 result = false;
-                console.info("DraggableListContainer.checkItemSequence: SeqNbr " + seqNbr + " out of sequence");
+                // console.info("DraggableListContainer.checkItemSequence(): SeqNbr " + seqNbr + " out of sequence");
             }
         }
         return result;
