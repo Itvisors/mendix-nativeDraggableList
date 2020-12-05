@@ -1,5 +1,5 @@
 import { Component, ReactNode, createElement } from "react";
-import { ListValue, ListAttributeValue, ListWidgetValue, ObjectItem, ValueStatus } from "mendix";
+import { ActionValue, ListValue, ListAttributeValue, ListWidgetValue, ObjectItem, ValueStatus } from "mendix";
 import { Text, View } from "react-native";
 
 import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
@@ -17,6 +17,7 @@ export interface DraggableListContainerProps {
     content: ListWidgetValue;
     dragHandleContent: ListWidgetValue;
     onDragEnd: (itemArray: ItemDataArray, from: number, to: number) => void;
+    onDropAction?: ActionValue;
 }
 
 const defaultStyle: CustomStyle = {
@@ -30,6 +31,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
 
     private dsItemMap: Map<string, ObjectItem> = new Map();
     private itemArray: ItemDataArray = [];
+    private dropPending = false;
 
     constructor(props: DraggableListContainerProps) {
         super(props);
@@ -38,10 +40,10 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
-    renderItem = ({ item, /* index, */ drag, isActive }: RenderItemParams<ItemData>): ReactNode => {
+    renderItem = ({ item, /* index, */ drag /* , isActive */ }: RenderItemParams<ItemData>): ReactNode => {
         const { content, dragHandleContent } = this.props;
         const dsItem = this.dsItemMap.get(item.itemId);
-        console.info("DraggableListContainer.renderItem " + item.itemId + ", active: " + isActive);
+        // console.info("DraggableListContainer.renderItem " + item.itemId + ", active: " + isActive);
         // When one or more items have no id, the list will contain only one item and no datasource items.
         if (!dsItem) {
             return (
@@ -65,6 +67,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
 
     onDragEnd = ({ data, from, to }: DragEndParams<ItemData>): void => {
         this.itemArray = data;
+        this.dropPending = true;
         this.props.onDragEnd(data, from, to);
     };
 
@@ -76,7 +79,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
                 <DraggableFlatList
                     data={this.itemArray}
                     renderItem={this.renderItem}
-                    keyExtractor={item => item.itemId}
+                    keyExtractor={item => item.listItemId}
                     onDragEnd={this.onDragEnd}
                 />
             </View>
@@ -84,13 +87,30 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
     }
 
     getData(): void {
-        const { ds, itemIdAttr, itemSeqNbrAttr } = this.props;
+        const { ds, itemIdAttr, itemSeqNbrAttr, onDropAction } = this.props;
         if (!ds || ds.status !== ValueStatus.Available || !ds.items) {
-            console.info("DraggableListContainer.getData: Datasource not available");
+            console.info("DraggableListContainer.getData(): No data available (yet)");
             return;
         }
 
-        console.info("DraggableListContainer.getData: Get data");
+        if (onDropAction && onDropAction.isExecuting) {
+            console.info("DraggableListContainer.getData(): The on drop action still running, skip reload of the data");
+            return;
+        } else {
+            this.dropPending = false;
+        }
+
+        if (this.dropPending) {
+            console.info("DraggableListContainer.getData(): The on drop action is pending, skip reload of the data");
+            return;
+        }
+
+        if (!this.checkItemSequence()) {
+            console.info("TaskBoard.getData(): The items are not (yet) returned in the right sequence");
+            return;
+        }
+
+        console.info("DraggableListContainer.getData(): Reload of the data");
         this.dsItemMap.clear();
         this.itemArray = [];
         let missingId = false;
@@ -101,6 +121,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
                 // console.info("DraggableListContainer.getData: Item id: " + itemId + ", seqnbr: " + seqNbr);
                 const itemData: ItemData = {
                     itemId,
+                    listItemId: itemId + new Date().getTime(),
                     seqNbr
                 };
                 this.dsItemMap.set(itemId, dsItem);
@@ -115,8 +136,33 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             this.itemArray = [];
             this.itemArray.push({
                 itemId: "error",
+                listItemId: "error" + new Date().getTime(),
                 seqNbr: 1
             });
         }
+    }
+
+    checkItemSequence(): boolean {
+        const { ds, itemSeqNbrAttr } = this.props;
+
+        if (!ds.items) {
+            return false;
+        }
+
+        let checkSeqNbr = 0;
+        let result = true;
+        // The datasource can be out of sequence after a drop. If the sequence numbers are out of order, skip loading the data.
+        // Note that multiple items can have the same sequence number if they are in different columns.
+        for (const itemObject of ds.items) {
+            const seqNbr = Number(itemSeqNbrAttr(itemObject).value);
+            if (seqNbr >= checkSeqNbr) {
+                checkSeqNbr = seqNbr;
+                console.info("DraggableListContainer.checkItemSequence: SeqNbr " + seqNbr + " in sequence");
+            } else {
+                result = false;
+                console.info("DraggableListContainer.checkItemSequence: SeqNbr " + seqNbr + " out of sequence");
+            }
+        }
+        return result;
     }
 }

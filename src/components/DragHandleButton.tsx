@@ -17,7 +17,7 @@ export class DragHandleButton extends Component<DragHandleButtonProps> {
             );
         } else {
             return (
-                <TouchableOpacity style={{ height: 50 }} onPressIn={() => onStartDrag()}>
+                <TouchableOpacity style={{ height: 50 }} onLongPress={() => onStartDrag()}>
                     {children}
                 </TouchableOpacity>
             );

@@ -6,7 +6,7 @@ import { Style } from "@mendix/pluggable-widgets-tools";
 
 import { DraggableListContainer } from "./components/DraggableListContainer";
 import { NativeDraggableListProps } from "../typings/NativeDraggableListProps";
-import { ItemDataArray } from "./types/CustomTypes";
+import { DropDataArray, ItemDataArray } from "./types/CustomTypes";
 
 export interface CustomStyle extends Style {
     container: ViewStyle;
@@ -28,13 +28,18 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
                 ", item array: " +
                 JSON.stringify(itemArray)
         );
+        const dropData: DropDataArray = [];
         // Adjust the sequence numbers, start at 1.
         for (let itemIndex = 0; itemIndex < itemArray.length; itemIndex++) {
-            itemArray[itemIndex].seqNbr = itemIndex + 1;
+            const itemData = itemArray[itemIndex];
+            dropData.push({
+                itemId: itemData.itemId,
+                seqNbr: itemIndex + 1
+            });
         }
         console.info("NativeDraggableList onDragEnd, adjusted item array: " + JSON.stringify(itemArray));
         const { dropDataAttr, dropFromAttr, dropToAttr, onDropAction } = this.props;
-        dropDataAttr.setValue(JSON.stringify(itemArray));
+        dropDataAttr.setValue(JSON.stringify(dropData));
         dropFromAttr.setTextValue("" + from);
         dropToAttr.setTextValue("" + to);
         if (onDropAction && onDropAction.canExecute && !onDropAction.isExecuting) {
@@ -60,6 +65,7 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
                 dragHandleContent={this.props.dragHandleContent}
                 style={this.props.style}
                 onDragEnd={this.onDragEnd}
+                onDropAction={this.props.onDropAction}
             />
         );
     }
