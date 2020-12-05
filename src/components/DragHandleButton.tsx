@@ -9,18 +9,15 @@ export class DragHandleButton extends Component<DragHandleButtonProps> {
     render(): ReactNode {
         const isAndroid = Platform.OS === "android";
         const { children, onStartDrag } = this.props;
+        // Especially Android does not respond well to onPressIn
         if (isAndroid) {
             return (
                 <TouchableNativeFeedback onLongPress={() => onStartDrag()}>
-                    <View style={{ height: 50 }}>{children}</View>
+                    <View>{children}</View>
                 </TouchableNativeFeedback>
             );
         } else {
-            return (
-                <TouchableOpacity style={{ height: 50 }} onLongPress={() => onStartDrag()}>
-                    {children}
-                </TouchableOpacity>
-            );
+            return <TouchableOpacity onLongPress={() => onStartDrag()}>{children}</TouchableOpacity>;
         }
     }
 }

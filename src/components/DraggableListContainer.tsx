@@ -58,7 +58,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             );
         }
         return (
-            <View style={{ flexDirection: "row", flex: 1, height: 50 }}>
+            <View style={{ flexDirection: "row", flex: 1 }}>
                 <DragHandleButton onStartDrag={drag}>{dragHandleContent(dsItem)}</DragHandleButton>
                 <View style={{ flex: 1 }}>{content(dsItem)}</View>
             </View>
