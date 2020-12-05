@@ -8,6 +8,7 @@ import { CustomStyle } from "../NativeDraggableList";
 import DraggableFlatList, { DragEndParams, RenderItemParams } from "react-native-draggable-flatlist";
 import { DragHandleButton } from "./DragHandleButton";
 import { ItemData, ItemDataArray } from "../types/CustomTypes";
+import { commonStyles } from "../ui/styles";
 
 export interface DraggableListContainerProps {
     ds: ListValue;
@@ -21,9 +22,11 @@ export interface DraggableListContainerProps {
 }
 
 const defaultStyle: CustomStyle = {
-    container: {
-        flex: 1
-    }
+    container: commonStyles.container,
+    itemView: commonStyles.itemView,
+    draggingItemView: commonStyles.draggingItemView,
+    itemContentView: commonStyles.itemContentView,
+    errorText: commonStyles.errorText
 };
 
 export class DraggableListContainer extends Component<DraggableListContainerProps> {
@@ -40,33 +43,33 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
-    renderItem = ({ item, /* index, */ drag /* , isActive */ }: RenderItemParams<ItemData>): ReactNode => {
+    renderItem = ({ item, /* index, */ drag, isActive }: RenderItemParams<ItemData>): ReactNode => {
         const { content, dragHandleContent } = this.props;
         const dsItem = this.dsItemMap.get(item.itemId);
         // console.info("DraggableListContainer.renderItem " + item.itemId + ", active: " + isActive);
         // When one or more items have no id, the list will contain only one item and no datasource items.
         if (!dsItem) {
             return (
-                <View style={{ flexDirection: "row", flex: 1, height: 50 }}>
+                <View style={this.styles.itemView}>
                     <DragHandleButton onStartDrag={drag}>
-                        <Text style={{ color: "red", fontSize: 17, margin: 10 }}>Error</Text>
+                        <Text style={this.styles.errorText}>Error</Text>
                     </DragHandleButton>
-                    <View style={{ flex: 1 }}>
-                        <Text style={{ color: "red", fontSize: 17, margin: 10 }}>Some items have no unique ID</Text>
+                    <View style={this.styles.itemContentView}>
+                        <Text style={this.styles.errorText}>Some items have no unique ID</Text>
                     </View>
                 </View>
             );
         }
         return (
-            <View style={{ flexDirection: "row", flex: 1 }}>
+            <View style={isActive ? this.styles.draggingItemView : this.styles.itemView}>
                 <DragHandleButton onStartDrag={drag}>{dragHandleContent(dsItem)}</DragHandleButton>
-                <View style={{ flex: 1 }}>{content(dsItem)}</View>
+                <View style={this.styles.itemContentView}>{content(dsItem)}</View>
             </View>
         );
     };
 
     onDragEnd = ({ data, from, to }: DragEndParams<ItemData>): void => {
-        console.info("DraggableListContainer.onDragEnd()");
+        // console.info("DraggableListContainer.onDragEnd()");
         this.itemArray = data;
         // Triggering the onDragEnd prop also triggers several renders because the context attributes are updated.
         // These renders cause flickering where the item is briefly visible in the old position.
@@ -76,7 +79,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
     };
 
     render(): ReactNode {
-        console.info("DraggableListContainer.render()");
+        // console.info("DraggableListContainer.render()");
         this.getData();
         return (
             <View style={this.styles.container}>
@@ -93,37 +96,37 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
     getData(): void {
         const { ds, itemIdAttr, itemSeqNbrAttr, onDropAction } = this.props;
         if (!ds || ds.status !== ValueStatus.Available || !ds.items) {
-            console.info("DraggableListContainer.getData(): No data available (yet)");
+            // console.info("DraggableListContainer.getData(): No data available (yet)");
             return;
         }
 
         // If the drop action is running, turn off the pending flag
         if (this.dropPending && onDropAction && onDropAction.isExecuting) {
-            console.info("DraggableListContainer.getData(): The drop action running now, skip reload of the data");
+            // console.info("DraggableListContainer.getData(): The drop action running now, skip reload of the data");
             this.dropPending = false;
         }
 
         // If we get here and the drop pending flag is on, this means a render is triggered because of the context attribute update.
         // The drop action is not yet running.
         if (this.dropPending) {
-            console.info("DraggableListContainer.getData(): The drop action is pending, skip reload of the data");
+            // console.info("DraggableListContainer.getData(): The drop action is pending, skip reload of the data");
             return;
         }
 
         // The drop action is still running
         if (onDropAction && onDropAction.isExecuting) {
-            console.info("DraggableListContainer.getData(): The drop action still running, skip reload of the data");
+            // console.info("DraggableListContainer.getData(): The drop action still running, skip reload of the data");
             return;
         }
 
         // Due to a refresh issue, the datasource data is updated even though the datasource has not yet updated itself.
         // This means that we see the new sequence numbers but the items are not yet in the required sequence.
         if (!this.checkItemSequence()) {
-            console.info("TaskBoard.getData(): The items are not (yet) returned in the right sequence");
+            // console.info("TaskBoard.getData(): The items are not (yet) returned in the right sequence");
             return;
         }
 
-        console.info("DraggableListContainer.getData(): Reload of the data");
+        // console.info("DraggableListContainer.getData(): Reload of the data");
         this.dsItemMap.clear();
         this.itemArray = [];
         let missingId = false;
@@ -144,7 +147,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             }
         }
         if (missingId) {
-            console.warn("DraggableListContainer.getData(): Invalid data, clear widget data");
+            // console.warn("DraggableListContainer.getData(): Invalid data, clear widget data");
             this.dsItemMap.clear();
             this.itemArray = [];
             this.itemArray.push({

@@ -1,6 +1,6 @@
 import { Component, ReactNode, createElement } from "react";
 import { EditableValue } from "mendix";
-import { ViewStyle } from "react-native";
+import { TextStyle, ViewStyle } from "react-native";
 
 import { Style } from "@mendix/pluggable-widgets-tools";
 
@@ -10,6 +10,10 @@ import { DropDataArray, ItemDataArray } from "./types/CustomTypes";
 
 export interface CustomStyle extends Style {
     container: ViewStyle;
+    itemView: ViewStyle;
+    draggingItemView: ViewStyle;
+    itemContentView: ViewStyle;
+    errorText: TextStyle;
 }
 
 export class NativeDraggableList extends Component<NativeDraggableListProps<CustomStyle>> {
@@ -20,14 +24,14 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
     }
 
     onDragEnd = (itemArray: ItemDataArray, from: number, to: number): void => {
-        console.info(
-            "NativeDraggableList onDragEnd, from: " +
-                from +
-                ", to: " +
-                to +
-                ", item array: " +
-                JSON.stringify(itemArray)
-        );
+        // console.info(
+        //     "NativeDraggableList onDragEnd, from: " +
+        //         from +
+        //         ", to: " +
+        //         to +
+        //         ", item array: " +
+        //         JSON.stringify(itemArray)
+        // );
         const dropData: DropDataArray = [];
         // Adjust the sequence numbers, start at 1.
         for (let itemIndex = 0; itemIndex < itemArray.length; itemIndex++) {
@@ -37,7 +41,7 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
                 seqNbr: itemIndex + 1
             });
         }
-        console.info("NativeDraggableList onDragEnd, adjusted item array: " + JSON.stringify(itemArray));
+        // console.info("NativeDraggableList onDragEnd, adjusted item array: " + JSON.stringify(itemArray));
         const { dropDataAttr, dropFromAttr, dropToAttr, onDropAction } = this.props;
         dropDataAttr.setValue(JSON.stringify(dropData));
         dropFromAttr.setTextValue("" + from);
