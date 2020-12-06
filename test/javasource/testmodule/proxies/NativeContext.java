@@ -20,9 +20,7 @@ public class NativeContext
 	 */
 	public enum MemberNames
 	{
-		DropData("DropData"),
-		DropFrom("DropFrom"),
-		DropTo("DropTo");
+		DropData("DropData");
 
 		private java.lang.String metaName;
 
@@ -143,78 +141,6 @@ public class NativeContext
 	public final void setDropData(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String dropdata)
 	{
 		getMendixObject().setValue(context, MemberNames.DropData.toString(), dropdata);
-	}
-
-	/**
-	 * @return value of DropFrom
-	 */
-	public final java.lang.Integer getDropFrom()
-	{
-		return getDropFrom(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of DropFrom
-	 */
-	public final java.lang.Integer getDropFrom(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.DropFrom.toString());
-	}
-
-	/**
-	 * Set value of DropFrom
-	 * @param dropfrom
-	 */
-	public final void setDropFrom(java.lang.Integer dropfrom)
-	{
-		setDropFrom(getContext(), dropfrom);
-	}
-
-	/**
-	 * Set value of DropFrom
-	 * @param context
-	 * @param dropfrom
-	 */
-	public final void setDropFrom(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer dropfrom)
-	{
-		getMendixObject().setValue(context, MemberNames.DropFrom.toString(), dropfrom);
-	}
-
-	/**
-	 * @return value of DropTo
-	 */
-	public final java.lang.Integer getDropTo()
-	{
-		return getDropTo(getContext());
-	}
-
-	/**
-	 * @param context
-	 * @return value of DropTo
-	 */
-	public final java.lang.Integer getDropTo(com.mendix.systemwideinterfaces.core.IContext context)
-	{
-		return (java.lang.Integer) getMendixObject().getValue(context, MemberNames.DropTo.toString());
-	}
-
-	/**
-	 * Set value of DropTo
-	 * @param dropto
-	 */
-	public final void setDropTo(java.lang.Integer dropto)
-	{
-		setDropTo(getContext(), dropto);
-	}
-
-	/**
-	 * Set value of DropTo
-	 * @param context
-	 * @param dropto
-	 */
-	public final void setDropTo(com.mendix.systemwideinterfaces.core.IContext context, java.lang.Integer dropto)
-	{
-		getMendixObject().setValue(context, MemberNames.DropTo.toString(), dropto);
 	}
 
 	/**
