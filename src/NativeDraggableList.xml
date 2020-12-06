@@ -51,20 +51,6 @@
                     <attributeType name="String"/>
                 </attributeTypes>
             </property>
-            <property key="dropFromAttr" type="attribute">
-                <caption>Drop from</caption>
-                <description>From value of drop data.</description>
-                <attributeTypes>
-                    <attributeType name="Integer"/>
-                </attributeTypes>
-            </property>
-            <property key="dropToAttr" type="attribute">
-                <caption>Drop to</caption>
-                <description>To value of drop data.</description>
-                <attributeTypes>
-                    <attributeType name="Integer"/>
-                </attributeTypes>
-            </property>
             <property key="onDropAction" type="action">
                 <caption>On drop action</caption>
                 <description>Configure the action to handle drops. Use the drop data to update the sequence. Also reset context ID value</description>

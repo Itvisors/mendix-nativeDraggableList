@@ -24,15 +24,8 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
-    onDragEnd = (itemArray: ItemDataArray, from: number, to: number): void => {
-        // console.info(
-        //     "NativeDraggableList onDragEnd, from: " +
-        //         from +
-        //         ", to: " +
-        //         to +
-        //         ", item array: " +
-        //         JSON.stringify(itemArray)
-        // );
+    onDragEnd = (itemArray: ItemDataArray): void => {
+        console.info("NativeDraggableList onDragEnd, item array: " + JSON.stringify(itemArray));
         const dropData: DropDataArray = [];
         // Adjust the sequence numbers, start at 1.
         for (let itemIndex = 0; itemIndex < itemArray.length; itemIndex++) {
@@ -43,10 +36,8 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
             });
         }
         // console.info("NativeDraggableList onDragEnd, adjusted item array: " + JSON.stringify(itemArray));
-        const { dropDataAttr, dropFromAttr, dropToAttr, onDropAction } = this.props;
+        const { dropDataAttr, onDropAction } = this.props;
         dropDataAttr.setValue(JSON.stringify(dropData));
-        dropFromAttr.setTextValue("" + from);
-        dropToAttr.setTextValue("" + to);
         if (onDropAction && onDropAction.canExecute && !onDropAction.isExecuting) {
             onDropAction.execute();
         }
@@ -54,11 +45,7 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
 
     render(): ReactNode {
         // Check whether event properties are writable. Common mistake to place the widget in a readonly dataview.
-        if (
-            this.isAttributeReadOnly("dropDataAttr", this.props.dropDataAttr) ||
-            this.isAttributeReadOnly("dropFromAttr", this.props.dropFromAttr) ||
-            this.isAttributeReadOnly("dropToAttr", this.props.dropToAttr)
-        ) {
+        if (this.isAttributeReadOnly("dropDataAttr", this.props.dropDataAttr)) {
             return null;
         }
         return (

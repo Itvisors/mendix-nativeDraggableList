@@ -17,7 +17,7 @@ export interface DraggableListContainerProps {
     itemSeqNbrAttr: ListAttributeValue<BigJs.Big>;
     content: ListWidgetValue;
     dragHandleContent: ListWidgetValue;
-    onDragEnd: (itemArray: ItemDataArray, from: number, to: number) => void;
+    onDragEnd: (itemArray: ItemDataArray) => void;
     onDropAction?: ActionValue;
 }
 
@@ -71,14 +71,14 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         );
     };
 
-    onDragEnd = ({ data, from, to }: DragEndParams<ItemData>): void => {
+    onDragEnd = ({ data }: DragEndParams<ItemData>): void => {
         // console.info("DraggableListContainer.onDragEnd()");
         this.itemArray = data;
         // Triggering the onDragEnd prop also triggers several renders because the context attributes are updated.
         // These renders cause flickering where the item is briefly visible in the old position.
         // Signal that we have a pending drop.
         this.dropPending = true;
-        this.props.onDragEnd(data, from, to);
+        this.props.onDragEnd(data);
     };
 
     render(): ReactNode {
