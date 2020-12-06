@@ -11,6 +11,7 @@ import { DropDataArray, ItemDataArray } from "./types/CustomTypes";
 export interface CustomStyle extends Style {
     container: ViewStyle;
     itemView: ViewStyle;
+    itemViewContainer: ViewStyle;
     draggingItemView: ViewStyle;
     itemContentView: ViewStyle;
     errorText: TextStyle;

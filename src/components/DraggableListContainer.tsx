@@ -24,6 +24,7 @@ export interface DraggableListContainerProps {
 const defaultStyle: CustomStyle = {
     container: commonStyles.container,
     itemView: commonStyles.itemView,
+    itemViewContainer: commonStyles.itemViewContainer,
     draggingItemView: commonStyles.draggingItemView,
     itemContentView: commonStyles.itemContentView,
     errorText: commonStyles.errorText
@@ -61,9 +62,11 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             );
         }
         return (
-            <View style={isActive ? this.styles.draggingItemView : this.styles.itemView}>
-                <DragHandleButton onStartDrag={drag}>{dragHandleContent(dsItem)}</DragHandleButton>
-                <View style={this.styles.itemContentView}>{content(dsItem)}</View>
+            <View style={this.styles.itemViewContainer}>
+                <View style={isActive ? this.styles.draggingItemView : this.styles.itemView}>
+                    <DragHandleButton onStartDrag={drag}>{dragHandleContent(dsItem)}</DragHandleButton>
+                    <View style={this.styles.itemContentView}>{content(dsItem)}</View>
+                </View>
             </View>
         );
     };
