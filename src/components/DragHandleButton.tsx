@@ -1,23 +1,19 @@
 import { Component, ReactNode, createElement } from "react";
-import { Platform, TouchableNativeFeedback, TouchableOpacity, View } from "react-native";
+import { Pressable } from "react-native";
+import { DragStartEnum } from "../../typings/NativeDraggableListProps";
 
 export interface DragHandleButtonProps {
+    dragStart: DragStartEnum;
     onStartDrag: () => void;
 }
 
 export class DragHandleButton extends Component<DragHandleButtonProps> {
     render(): ReactNode {
-        const isAndroid = Platform.OS === "android";
         const { children, onStartDrag } = this.props;
-        // Especially Android does not respond well to onPressIn
-        if (isAndroid) {
-            return (
-                <TouchableNativeFeedback onLongPress={() => onStartDrag()}>
-                    <View>{children}</View>
-                </TouchableNativeFeedback>
-            );
+        if (this.props.dragStart === "onPressIn") {
+            return <Pressable onPressIn={() => onStartDrag()}>{children}</Pressable>;
         } else {
-            return <TouchableOpacity onLongPress={() => onStartDrag()}>{children}</TouchableOpacity>;
+            return <Pressable onLongPress={() => onStartDrag()}>{children}</Pressable>;
         }
     }
 }

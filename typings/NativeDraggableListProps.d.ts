@@ -6,6 +6,8 @@
 import { ComponentType } from "react";
 import { ActionValue, EditableValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
 
+export type DragStartEnum = "onPressIn" | "onLongPress";
+
 export interface NativeDraggableListProps<Style> {
     name: string;
     style: Style[];
@@ -14,6 +16,7 @@ export interface NativeDraggableListProps<Style> {
     itemSeqNbrAttr: ListAttributeValue<BigJs.Big>;
     content: ListWidgetValue;
     dragHandleContent: ListWidgetValue;
+    dragStart: DragStartEnum;
     dropDataAttr: EditableValue<string>;
     onDropAction?: ActionValue;
 }
@@ -26,6 +29,7 @@ export interface NativeDraggableListPreviewProps {
     itemSeqNbrAttr: string;
     content: { widgetCount: number; renderer: ComponentType };
     dragHandleContent: { widgetCount: number; renderer: ComponentType };
+    dragStart: DragStartEnum;
     dropDataAttr: string;
     onDropAction: {} | null;
 }

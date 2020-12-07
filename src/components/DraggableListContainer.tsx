@@ -9,6 +9,7 @@ import DraggableFlatList, { DragEndParams, RenderItemParams } from "react-native
 import { DragHandleButton } from "./DragHandleButton";
 import { ItemData, ItemDataArray } from "../types/CustomTypes";
 import { commonStyles } from "../ui/styles";
+import { DragStartEnum } from "../../typings/NativeDraggableListProps";
 
 export interface DraggableListContainerProps {
     ds: ListValue;
@@ -17,6 +18,7 @@ export interface DraggableListContainerProps {
     itemSeqNbrAttr: ListAttributeValue<BigJs.Big>;
     content: ListWidgetValue;
     dragHandleContent: ListWidgetValue;
+    dragStart: DragStartEnum;
     onDragEnd: (itemArray: ItemDataArray) => void;
     onDropAction?: ActionValue;
 }
@@ -45,14 +47,14 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
     }
 
     renderItem = ({ item, /* index, */ drag, isActive }: RenderItemParams<ItemData>): ReactNode => {
-        const { content, dragHandleContent } = this.props;
+        const { content, dragHandleContent, dragStart } = this.props;
         const dsItem = this.dsItemMap.get(item.itemId);
         // console.info("DraggableListContainer.renderItem " + item.itemId + ", active: " + isActive);
         // When one or more items have no id, the list will contain only one item and no datasource items.
         if (!dsItem) {
             return (
                 <View style={this.styles.itemView}>
-                    <DragHandleButton onStartDrag={drag}>
+                    <DragHandleButton dragStart={dragStart} onStartDrag={drag}>
                         <Text style={this.styles.errorText}>Error</Text>
                     </DragHandleButton>
                     <View style={this.styles.itemContentView}>
@@ -64,7 +66,9 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         return (
             <View style={this.styles.itemViewContainer}>
                 <View style={isActive ? this.styles.draggingItemView : this.styles.itemView}>
-                    <DragHandleButton onStartDrag={drag}>{dragHandleContent(dsItem)}</DragHandleButton>
+                    <DragHandleButton dragStart={dragStart} onStartDrag={drag}>
+                        {dragHandleContent(dsItem)}
+                    </DragHandleButton>
                     <View style={this.styles.itemContentView}>{content(dsItem)}</View>
                 </View>
             </View>

@@ -23,10 +23,17 @@ export const brand = {
     dangerLight: `rgba(${anyColorToRgbString("#ed1c24")}, 0.14)`,
 };
 //
+// Mendix9 / RN 0.63 darkmode detection is different:
 // Dark Mode - Inherits OS theme if possible
-export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
-    ? NativeModules.RNDarkMode.initialMode === "dark"
-    : false;
+// Safely check if Appearance API is available in this version of React Native
+const Appearance = require("react-native").Appearance;
+export const darkMode =
+    NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
+        ? NativeModules.RNDarkMode.initialMode === "dark"
+        : Appearance
+        ? Appearance.getColorScheme() === "dark"
+        : false;
+
 //
 // Background Colors
 const backgroundColor = darkMode ? "#000" : "#FFF";
