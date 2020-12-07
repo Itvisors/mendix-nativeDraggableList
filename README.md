@@ -8,7 +8,6 @@ Native draggable list, allow users to reorder items in a list
 - Easy to style
 
 ## Limitations
-- Only long press can be used to initiate the drag
 - Currently pluggable widgets cannot change data in a datasource so the widget sets a JSON string on the context upon drop
 
 ## Context entity
@@ -16,6 +15,7 @@ The widget needs a context to place the drop data in. Make sure it has an unlimi
 
 ## Usage
 - Place the widget on your native page in a dataview.
+- Choose whether to start the drag when pressing on the item or after a longpress.
 - Your context entity must have an unlimited string to hold the drop data
 - Configure the datasource
 - Place content in the drag handle (for example an image that indicates dragging is possible) and content place holders
@@ -30,7 +30,7 @@ You may use your own entity if you prefer, just make sure it is non-persistent a
 
 The on drop action must be a nanoflow. In your nanoflow, call JavaScript action `NanoflowCommonsITvisors.ParseNativeDraggableListDropData`
 to get a list of non-persistent objects for each of the items in the list.
-For each item in the list, get the corresponding object and update it's sequence number with the value of the drop data item.
+For each item in the list, get the corresponding object and update its sequence number with the value of the drop data item.
 
 At the end of your nanoflow, be sure to clear the drop data string of your context object to clean it up.
 
