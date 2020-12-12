@@ -25,7 +25,7 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
     }
 
     onDragEnd = (itemArray: ItemDataArray): void => {
-        console.info("NativeDraggableList onDragEnd, item array: " + JSON.stringify(itemArray));
+        // console.info("NativeDraggableList onDragEnd, item array: " + JSON.stringify(itemArray));
         const dropData: DropDataArray = [];
         // Adjust the sequence numbers, start at 1.
         for (let itemIndex = 0; itemIndex < itemArray.length; itemIndex++) {
