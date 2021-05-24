@@ -4,6 +4,7 @@ import { Text, View } from "react-native";
 
 import { mergeNativeStyles } from "@mendix/pluggable-widgets-tools";
 
+import { Big } from "big.js";
 import { CustomStyle } from "../NativeDraggableList";
 import DraggableFlatList, { DragEndParams, RenderItemParams } from "react-native-draggable-flatlist";
 import { DragHandleButton } from "./DragHandleButton";
@@ -14,8 +15,8 @@ import { DragStartEnum } from "../../typings/NativeDraggableListProps";
 export interface DraggableListContainerProps {
     ds: ListValue;
     style: CustomStyle[];
-    itemIdAttr: ListAttributeValue<BigJs.Big | string>;
-    itemSeqNbrAttr: ListAttributeValue<BigJs.Big>;
+    itemIdAttr: ListAttributeValue<Big | string>;
+    itemSeqNbrAttr: ListAttributeValue<Big>;
     content: ListWidgetValue;
     dragHandleContent: ListWidgetValue;
     dragStart: DragStartEnum;
@@ -67,9 +68,9 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             <View style={this.styles.itemViewContainer}>
                 <View style={isActive ? this.styles.draggingItemView : this.styles.itemView}>
                     <DragHandleButton dragStart={dragStart} onStartDrag={drag}>
-                        {dragHandleContent(dsItem)}
+                        {dragHandleContent.get(dsItem)}
                     </DragHandleButton>
-                    <View style={this.styles.itemContentView}>{content(dsItem)}</View>
+                    <View style={this.styles.itemContentView}>{content.get(dsItem)}</View>
                 </View>
             </View>
         );
@@ -138,8 +139,8 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         this.itemArray = [];
         let missingId = false;
         for (const dsItem of ds.items) {
-            const itemId = itemIdAttr(dsItem).displayValue;
-            const seqNbr = Number(itemSeqNbrAttr(dsItem).value);
+            const itemId = itemIdAttr.get(dsItem).displayValue;
+            const seqNbr = Number(itemSeqNbrAttr.get(dsItem).value);
             if (itemId && itemId.trim()) {
                 // console.info("DraggableListContainer.getData: Item id: " + itemId + ", seqnbr: " + seqNbr);
                 const itemData: ItemData = {
@@ -177,7 +178,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         // The datasource can be out of sequence after a drop. If the sequence numbers are out of order, skip loading the data.
         // Note that multiple items can have the same sequence number if they are in different columns.
         for (const itemObject of ds.items) {
-            const seqNbr = Number(itemSeqNbrAttr(itemObject).value);
+            const seqNbr = Number(itemSeqNbrAttr.get(itemObject).value);
             if (seqNbr >= checkSeqNbr) {
                 checkSeqNbr = seqNbr;
                 // console.info("DraggableListContainer.checkItemSequence(): SeqNbr " + seqNbr + " in sequence");
