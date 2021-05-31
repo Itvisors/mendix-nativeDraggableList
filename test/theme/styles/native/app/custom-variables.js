@@ -8,9 +8,9 @@ import { anyColorToRgbString, setColorBasedOnBackground, setContrastScale, } fro
 ==> DO NOT change the core variable file (or any other file in core), as that makes updating Atlas a lot harder in the future.
 
 */
-//== Global variables
-//## Variables to be used during styling
-//-------------------------------------------------------------------------------------------------------------------//
+// == Global variables
+// ## Variables to be used during styling
+// -------------------------------------------------------------------------------------------------------------------//
 // Brand Style
 export const brand = {
     primary: "#0595DB",
@@ -24,9 +24,13 @@ export const brand = {
 };
 //
 // Dark Mode - Inherits OS theme if possible
-export const darkMode = NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
-    ? NativeModules.RNDarkMode.initialMode === "dark"
-    : false;
+const Appearance = require("react-native").Appearance;
+export const darkMode =
+    NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
+        ? NativeModules.RNDarkMode.initialMode === "dark"
+        : Appearance
+        ? Appearance.getColorScheme() === "dark"
+        : false;
 //
 // Background Colors
 const backgroundColor = darkMode ? "#000" : "#FFF";
