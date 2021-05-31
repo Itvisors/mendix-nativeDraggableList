@@ -44,6 +44,14 @@
         <!-- Drop properties -->
 
         <propertyGroup caption="Drop">
+            <property key="dragStart" type="enumeration" defaultValue="onPressIn">
+                <caption>Drag start</caption>
+                <description>The action that starts the drag.</description>
+                <enumerationValues>
+                    <enumerationValue key="onPressIn">On press in</enumerationValue>
+                    <enumerationValue key="onLongPress">On long press</enumerationValue>
+                </enumerationValues>
+            </property>
             <property key="dropDataAttr" type="attribute">
                 <caption>Drop data</caption>
                 <description>JSON data containing the new sequence numbers of items in the column the item was dropped on.</description>

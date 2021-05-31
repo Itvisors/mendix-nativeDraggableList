@@ -1,8 +1,14 @@
 import { NativeModules, StyleSheet } from "react-native";
 
+// Mendix9 / RN 0.63 darkmode detection is different:
+// Dark Mode - Inherits OS theme if possible
+// Safely check if Appearance API is available in this version of React Native
+const Appearance = require("react-native").Appearance;
 export const darkMode =
     NativeModules && NativeModules.RNDarkMode && NativeModules.RNDarkMode.initialMode
         ? NativeModules.RNDarkMode.initialMode === "dark"
+        : Appearance
+        ? Appearance.getColorScheme() === "dark"
         : false;
 
 export const commonStyles = StyleSheet.create({

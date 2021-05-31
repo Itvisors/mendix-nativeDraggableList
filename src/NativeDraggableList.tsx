@@ -56,6 +56,7 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
                 content={this.props.content}
                 dragHandleContent={this.props.dragHandleContent}
                 style={this.props.style}
+                dragStart={this.props.dragStart}
                 onDragEnd={this.onDragEnd}
                 onDropAction={this.props.onDropAction}
             />

@@ -5,15 +5,19 @@
  */
 import { ComponentType } from "react";
 import { ActionValue, EditableValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
+import { Big } from "big.js";
+
+export type DragStartEnum = "onPressIn" | "onLongPress";
 
 export interface NativeDraggableListProps<Style> {
     name: string;
     style: Style[];
     ds: ListValue;
-    itemIdAttr: ListAttributeValue<BigJs.Big | string>;
-    itemSeqNbrAttr: ListAttributeValue<BigJs.Big>;
+    itemIdAttr: ListAttributeValue<Big | string>;
+    itemSeqNbrAttr: ListAttributeValue<Big>;
     content: ListWidgetValue;
     dragHandleContent: ListWidgetValue;
+    dragStart: DragStartEnum;
     dropDataAttr: EditableValue<string>;
     onDropAction?: ActionValue;
 }
@@ -24,8 +28,9 @@ export interface NativeDraggableListPreviewProps {
     ds: {} | null;
     itemIdAttr: string;
     itemSeqNbrAttr: string;
-    content: { widgetCount: number; renderer: ComponentType };
-    dragHandleContent: { widgetCount: number; renderer: ComponentType };
+    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    dragHandleContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    dragStart: DragStartEnum;
     dropDataAttr: string;
     onDropAction: {} | null;
 }
