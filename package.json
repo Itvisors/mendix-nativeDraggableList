@@ -1,7 +1,7 @@
 {
   "name": "nativedraggablelist",
   "widgetName": "NativeDraggableList",
-  "version": "1.0.0",
+  "version": "2.2.0",
   "description": "Native draggable list",
   "copyright": "ITvisors 2020",
   "author": "Marcel Groeneweg",
