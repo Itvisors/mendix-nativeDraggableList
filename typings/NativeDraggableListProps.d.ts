@@ -25,11 +25,11 @@ export interface NativeDraggableListProps<Style> {
 export interface NativeDraggableListPreviewProps {
     class: string;
     style: string;
-    ds: {} | null;
+    ds: {} | { type: string } | null;
     itemIdAttr: string;
     itemSeqNbrAttr: string;
-    content: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
-    dragHandleContent: { widgetCount: number; renderer: ComponentType<{caption?: string}> };
+    content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
+    dragHandleContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     dragStart: DragStartEnum;
     dropDataAttr: string;
     onDropAction: {} | null;

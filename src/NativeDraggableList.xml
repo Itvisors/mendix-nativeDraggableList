@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.mendix.com/widget/1.0/ ../node_modules/mendix/custom_widget.xsd">
     <name>Native Draggable List</name>
     <description>Native draggable list</description>
-    <icon>iVBORw0KGgoAAAANSUhEUgAAAFAAAABQCAYAAACOEfKtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAAEnMAABJzAYwiuQcAAAIISURBVHhe7dxNK0RRHMfxM5SaUkR5KERKNhbKC2BhYWM3O5aWeAHWXoC9HTsbeQVegKJYKCmNSSlEyVN0/e/MwVz3XnfMr1nN91Onc93ltzlzj9NtckEQONSvxc+oEwFFiUt4cnSedf3L4flezl9GxD6BxEuW1oUlLCKgiIAiAooIKCKgiICiWMC0DWOzS+vCYYKIJSwioIiAIgKKCCgioIgD1RpxoCriQLVBYkv4q/Rzb797Ghpxbx2d5fvNqu3h3uVLRZe/vnJHZ7uxZRwLODa9EhQLi+61p8/fQajt7ta9dXXPBIXBfX+rLBIwt3O54D4+tlxrq7+DBEsWcdNf/wS0eAM2Hdto7jWb7dHGhEW8CP+ofois2iBetnYba5XLaMApPyPbd6vqgMN+RrZxP0cCltc0anLq50jAIz8j24mfIwE3bNxXLvGHFxvrlcuqgP6xvGzjvXwDaZatVeISDiNu2zRrg+/DuJKNuepNdCjxOMs21eFeJ3zShI/rZv+f7sbGgY0TixduoiMSA6J2kSWM/yOgiIAiAooIKCKgiFfZapS23eMTKCKgiIAiAooIKCKgiIAiAooIKOJAVcQnUERAUeIS5jXfON6RFvGOdIMQUERAEQFFBBQRUERAUSwgPzqRjB+daBCWsIiAIgKKCCgioIiAIgKKCCgioIiAIgKKCCgioMS5T8YpiZ+ZpXoXAAAAAElFTkSuQmCC</icon>
+    <studioProCategory>Data containers</studioProCategory>
     <properties>
         <propertyGroup caption="General">
             <property key="ds" type="datasource" isList="true">
