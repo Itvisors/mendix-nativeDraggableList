@@ -3,7 +3,7 @@
  * WARNING: All changes made to this file will be overwritten
  * @author Mendix UI Content Team
  */
-import { ComponentType } from "react";
+import { ComponentType, CSSProperties } from "react";
 import { ActionValue, EditableValue, ListValue, ListAttributeValue, ListWidgetValue } from "mendix";
 import { Big } from "big.js";
 
@@ -23,8 +23,10 @@ export interface NativeDraggableListProps<Style> {
 }
 
 export interface NativeDraggableListPreviewProps {
-    class: string;
+    className: string;
     style: string;
+    styleObject?: CSSProperties;
+    readOnly: boolean;
     ds: {} | { type: string } | null;
     itemIdAttr: string;
     itemSeqNbrAttr: string;
