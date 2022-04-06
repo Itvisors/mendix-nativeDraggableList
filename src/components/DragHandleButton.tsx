@@ -1,4 +1,4 @@
-import { Component, ReactNode, createElement } from "react";
+import React, { ReactElement, createElement } from "react";
 import { Pressable } from "react-native";
 import { DragStartEnum } from "../../typings/NativeDraggableListProps";
 
@@ -7,13 +7,11 @@ export interface DragHandleButtonProps {
     onStartDrag: () => void;
 }
 
-export class DragHandleButton extends Component<DragHandleButtonProps> {
-    render(): ReactNode {
-        const { children, onStartDrag } = this.props;
-        if (this.props.dragStart === "onPressIn") {
-            return <Pressable onPressIn={() => onStartDrag()}>{children}</Pressable>;
-        } else {
-            return <Pressable onLongPress={() => onStartDrag()}>{children}</Pressable>;
-        }
+export function DragHandleButton(props: React.PropsWithChildren<DragHandleButtonProps>): ReactElement {
+    const { children, dragStart, onStartDrag } = props;
+    if (dragStart === "onPressIn") {
+        return <Pressable onPressIn={() => onStartDrag()}>{children}</Pressable>;
+    } else {
+        return <Pressable onLongPress={() => onStartDrag()}>{children}</Pressable>;
     }
 }

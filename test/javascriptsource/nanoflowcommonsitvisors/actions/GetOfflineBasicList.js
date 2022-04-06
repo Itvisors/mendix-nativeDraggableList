@@ -5,11 +5,12 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
+import "mx-global";
 import { Big } from "big.js";
 
 // BEGIN EXTRA CODE
 
-import { addConstraint, addSort, checkDateConstraintsBasic } from "../GetOfflineUtils";
+import { addConstraint, addSort, checkDateConstraintsBasic } from "../NanoflowCommonsITvisorsUtils";
 
 // END EXTRA CODE
 

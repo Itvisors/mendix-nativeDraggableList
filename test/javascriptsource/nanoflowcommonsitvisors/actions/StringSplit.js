@@ -5,9 +5,13 @@
 // - the code between BEGIN USER CODE and END USER CODE
 // - the code between BEGIN EXTRA CODE and END EXTRA CODE
 // Other code you write will be lost the next time you deploy the project.
+import "mx-global";
 import { Big } from "big.js";
 
 // BEGIN EXTRA CODE
+
+import { createMxObject } from "../NanoflowCommonsITvisorsUtils";
+
 // END EXTRA CODE
 
 /**
@@ -39,21 +43,6 @@ export async function StringSplit(inputString, splitParameter) {
 		}
 		return resolve(result);
 	});
-
-	async function createMxObject(entityName) {
-		return new Promise((resolve, reject) => {
-			mx.data.create({
-				entity: entityName,
-				callback:  (mxObject) => {
-					resolve(mxObject);
-				},
-				error: (e) => {
-					reject("Could not create '" + entityName + "': " + e.message);
-				}
-			});
-
-		});
-	}
 
 	// END USER CODE
 }
