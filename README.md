@@ -21,6 +21,7 @@ The widget needs a context to place the drop data in. Make sure it has an unlimi
 - Place content in the drag handle (for example an image that indicates dragging is possible) and content place holders
 - Input elements and buttons are best placed in the content place holder, not in the drag handle.
 - Configure the drop data and on drop action, which needs to be a nanoflow as you need to process the drop data
+- Additionally, you can configure the Dragged item ID attribute to receive the ID of the item that was dragged
 
 ## Handle the drop
 Appstore module [NanoflowCommonsITvisors](https://appstore.home.mendix.com/link/app/110104/ITvisors/Nanoflow-Commons-ITvisors)

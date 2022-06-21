@@ -17,7 +17,6 @@
                 <description>Item ID attribute</description>
                 <attributeTypes>
                     <attributeType name="AutoNumber"/>
-                    <attributeType name="Enum"/>
                     <attributeType name="Integer"/>
                     <attributeType name="Long"/>
                     <attributeType name="String"/>
@@ -51,6 +50,15 @@
                     <enumerationValue key="onPressIn">On press in</enumerationValue>
                     <enumerationValue key="onLongPress">On long press</enumerationValue>
                 </enumerationValues>
+            </property>
+            <property key="draggedItemIdAttr" type="attribute" required="false">
+                <caption>Dragged item ID</caption>
+                <description>The ID of the dragged item.</description>
+                <attributeTypes>
+                    <attributeType name="Integer"/>
+                    <attributeType name="Long"/>
+                    <attributeType name="String"/>
+                </attributeTypes>
             </property>
             <property key="dropDataAttr" type="attribute">
                 <caption>Drop data</caption>

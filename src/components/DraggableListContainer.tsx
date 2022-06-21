@@ -20,7 +20,7 @@ export interface DraggableListContainerProps {
     content: ListWidgetValue;
     dragHandleContent: ListWidgetValue;
     dragStart: DragStartEnum;
-    onDragEnd: (itemArray: ItemDataArray) => void;
+    onDragEnd: (draggedItemID: string | undefined, itemArray: ItemDataArray) => void;
     onDropAction?: ActionValue;
 }
 
@@ -39,11 +39,13 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
     private dsItemMap: Map<string, ObjectItem> = new Map();
     private itemArray: ItemDataArray = [];
     private dropPending = false;
+    private draggedItemID: string | undefined = undefined;
 
     constructor(props: DraggableListContainerProps) {
         super(props);
 
         this.renderItem = this.renderItem.bind(this);
+        this.onDragBegin = this.onDragBegin.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
@@ -83,7 +85,11 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         // These renders cause flickering where the item is briefly visible in the old position.
         // Signal that we have a pending drop.
         this.dropPending = true;
-        this.props.onDragEnd(data);
+        this.props.onDragEnd(this.draggedItemID, data);
+    };
+
+    onDragBegin = (index: number): void => {
+        this.draggedItemID = this.itemArray[index].itemId;
     };
 
     render(): ReactNode {
@@ -95,6 +101,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
                     data={this.itemArray}
                     renderItem={this.renderItem}
                     keyExtractor={item => item.listItemId}
+                    onDragBegin={this.onDragBegin}
                     onDragEnd={this.onDragEnd}
                 />
             </View>
@@ -176,7 +183,6 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         let checkSeqNbr = 0;
         let result = true;
         // The datasource can be out of sequence after a drop. If the sequence numbers are out of order, skip loading the data.
-        // Note that multiple items can have the same sequence number if they are in different columns.
         for (const itemObject of ds.items) {
             const seqNbr = Number(itemSeqNbrAttr.get(itemObject).value);
             if (seqNbr >= checkSeqNbr) {

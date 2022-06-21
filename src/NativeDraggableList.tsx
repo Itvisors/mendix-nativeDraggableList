@@ -24,7 +24,7 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
-    onDragEnd = (itemArray: ItemDataArray): void => {
+    onDragEnd = (draggedItemId: string, itemArray: ItemDataArray): void => {
         // console.info("NativeDraggableList onDragEnd, item array: " + JSON.stringify(itemArray));
         const dropData: DropDataArray = [];
         // Adjust the sequence numbers, start at 1.
@@ -36,8 +36,19 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
             });
         }
         // console.info("NativeDraggableList onDragEnd, adjusted item array: " + JSON.stringify(itemArray));
-        const { dropDataAttr, onDropAction } = this.props;
-        dropDataAttr.setValue(JSON.stringify(dropData));
+        const { draggedItemIdAttr, dropDataAttr, onDropAction } = this.props;
+        if (draggedItemIdAttr) {
+            if (draggedItemIdAttr.readOnly) {
+                console.error("NativeDraggableList: Dragged item ID attribute is read only");
+            } else {
+                draggedItemIdAttr.setTextValue("" + draggedItemId);
+            }
+        }
+        if (dropDataAttr.readOnly) {
+            console.error("NativeDraggableList: Drop data attribute is read only");
+        } else {
+            dropDataAttr.setValue(JSON.stringify(dropData));
+        }
         if (onDropAction && onDropAction.canExecute && !onDropAction.isExecuting) {
             onDropAction.execute();
         }

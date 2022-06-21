@@ -20,7 +20,8 @@ public class NativeContext
 	 */
 	public enum MemberNames
 	{
-		DropData("DropData");
+		DropData("DropData"),
+		DraggedItemID("DraggedItemID");
 
 		private final java.lang.String metaName;
 
@@ -148,6 +149,42 @@ public class NativeContext
 	public final void setDropData(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String dropdata)
 	{
 		getMendixObject().setValue(context, MemberNames.DropData.toString(), dropdata);
+	}
+
+	/**
+	 * @return value of DraggedItemID
+	 */
+	public final java.lang.String getDraggedItemID()
+	{
+		return getDraggedItemID(getContext());
+	}
+
+	/**
+	 * @param context
+	 * @return value of DraggedItemID
+	 */
+	public final java.lang.String getDraggedItemID(com.mendix.systemwideinterfaces.core.IContext context)
+	{
+		return (java.lang.String) getMendixObject().getValue(context, MemberNames.DraggedItemID.toString());
+	}
+
+	/**
+	 * Set value of DraggedItemID
+	 * @param draggeditemid
+	 */
+	public final void setDraggedItemID(java.lang.String draggeditemid)
+	{
+		setDraggedItemID(getContext(), draggeditemid);
+	}
+
+	/**
+	 * Set value of DraggedItemID
+	 * @param context
+	 * @param draggeditemid
+	 */
+	public final void setDraggedItemID(com.mendix.systemwideinterfaces.core.IContext context, java.lang.String draggeditemid)
+	{
+		getMendixObject().setValue(context, MemberNames.DraggedItemID.toString(), draggeditemid);
 	}
 
 	/**

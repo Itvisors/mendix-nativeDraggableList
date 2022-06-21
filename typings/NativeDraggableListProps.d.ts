@@ -18,6 +18,7 @@ export interface NativeDraggableListProps<Style> {
     content: ListWidgetValue;
     dragHandleContent: ListWidgetValue;
     dragStart: DragStartEnum;
+    draggedItemIdAttr?: EditableValue<Big | string>;
     dropDataAttr: EditableValue<string>;
     onDropAction?: ActionValue;
 }
@@ -33,6 +34,7 @@ export interface NativeDraggableListPreviewProps {
     content: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     dragHandleContent: { widgetCount: number; renderer: ComponentType<{ caption?: string }> };
     dragStart: DragStartEnum;
+    draggedItemIdAttr: string;
     dropDataAttr: string;
     onDropAction: {} | null;
 }
