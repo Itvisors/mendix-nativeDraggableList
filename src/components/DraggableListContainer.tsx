@@ -22,6 +22,7 @@ export interface DraggableListContainerProps {
     dragStart: DragStartEnum;
     onDragEnd: (draggedItemID: string | undefined, itemArray: ItemDataArray) => void;
     onDropAction?: ActionValue;
+    widgetName: string;
 }
 
 const defaultStyle: CustomStyle = {
@@ -49,15 +50,15 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
-    renderItem = ({ item, /* index, */ drag, isActive }: RenderItemParams<ItemData>): ReactNode => {
-        const { content, dragHandleContent, dragStart } = this.props;
+    renderItem = ({ item, index, drag, isActive }: RenderItemParams<ItemData>): ReactNode => {
+        const { content, dragHandleContent, dragStart, widgetName } = this.props;
         const dsItem = this.dsItemMap.get(item.itemId);
         // console.info("DraggableListContainer.renderItem " + item.itemId + ", active: " + isActive);
         // When one or more items have no id, the list will contain only one item and no datasource items.
         if (!dsItem) {
             return (
-                <View style={this.styles.itemView}>
-                    <DragHandleButton dragStart={dragStart} onStartDrag={drag}>
+                <View style={this.styles.itemView} testID={`${widgetName}$item${index}`}>
+                    <DragHandleButton dragStart={dragStart} onStartDrag={drag} widgetName={widgetName}>
                         <Text style={this.styles.errorText}>Error</Text>
                     </DragHandleButton>
                     <View style={this.styles.itemContentView}>
@@ -67,12 +68,14 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
             );
         }
         return (
-            <View style={this.styles.itemViewContainer}>
+            <View style={this.styles.itemViewContainer} testID={`${widgetName}$item${index}`}>
                 <View style={isActive ? this.styles.draggingItemView : this.styles.itemView}>
-                    <DragHandleButton dragStart={dragStart} onStartDrag={drag}>
-                        {dragHandleContent.get(dsItem)}
+                    <DragHandleButton dragStart={dragStart} onStartDrag={drag} widgetName={widgetName}>
+                        {dragHandleContent.get(dsItem) as ReactNode}
                     </DragHandleButton>
-                    <View style={this.styles.itemContentView}>{content.get(dsItem)}</View>
+                    <View style={this.styles.itemContentView} testID={`${widgetName}$item${index}$content`}>
+                        {content.get(dsItem) as ReactNode}
+                    </View>
                 </View>
             </View>
         );
@@ -96,7 +99,7 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         // console.info("DraggableListContainer.render()");
         this.getData();
         return (
-            <View style={this.styles.container}>
+            <View style={this.styles.container} testID={this.props.widgetName}>
                 <DraggableFlatList
                     data={this.itemArray}
                     renderItem={this.renderItem}

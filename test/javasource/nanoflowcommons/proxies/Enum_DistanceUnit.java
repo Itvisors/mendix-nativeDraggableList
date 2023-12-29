@@ -2,15 +2,17 @@
 //
 // WARNING: Code you write here will be lost the next time you deploy the project.
 
-package nativemobileresources.proxies;
+package nanoflowcommons.proxies;
 
-public enum Enumeration
+public enum Enum_DistanceUnit
 {
-	Test(new java.lang.String[][] { new java.lang.String[] { "en_US", "Test" } });
+	KILOMETER(new java.lang.String[][] { new java.lang.String[] { "en_US", "KILOMETER" } }),
+	STATUTE_MILE(new java.lang.String[][] { new java.lang.String[] { "en_US", "STATUTE_MILE" } }),
+	NAUTICAL_MILE(new java.lang.String[][] { new java.lang.String[] { "en_US", "NAUTICAL_MILE" } });
 
 	private final java.util.Map<java.lang.String, java.lang.String> captions;
 
-	private Enumeration(java.lang.String[][] captionStrings)
+	private Enum_DistanceUnit(java.lang.String[][] captionStrings)
 	{
 		this.captions = new java.util.HashMap<>();
 		for (java.lang.String[] captionString : captionStrings) {

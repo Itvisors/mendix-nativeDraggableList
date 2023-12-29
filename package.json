@@ -1,12 +1,12 @@
 {
   "name": "nativedraggablelist",
   "widgetName": "NativeDraggableList",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "Native draggable list",
   "copyright": "ITvisors 2020",
   "author": "Marcel Groeneweg",
   "engines": {
-    "node": ">=12"
+    "node": ">=16"
   },
   "license": "Apache-2.0",
   "config": {
@@ -22,12 +22,18 @@
     "release": "pluggable-widgets-tools release:native"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^9.13.1",
-    "@types/big.js": "^6.0.2",
-    "@types/react": "~17.0.1",
-    "@types/react-native": "~0.63.52"
+    "@mendix/pluggable-widgets-tools": "^9.24.0",
+    "@types/big.js": "^6.0.2"
   },
   "dependencies": {
     "react-native-draggable-flatlist": "^3.0.6"
+  },
+  "resolutions": {
+    "react": "18.2.0",
+    "react-native": "0.70.7"
+  },
+  "overrides": {
+    "react": "18.2.0",
+    "react-native": "0.70.7"
   }
 }

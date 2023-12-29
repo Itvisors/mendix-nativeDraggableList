@@ -24,25 +24,27 @@ import { createMxObject } from "../NanoflowCommonsITvisorsUtils";
 export async function StringSplit(inputString, splitParameter) {
 	// BEGIN USER CODE
 
-	return new Promise((resolve, reject) => {
-		if (splitParameter === undefined || splitParameter === null) {
-			return reject(new Error("StringSplit: splitParameter must not be empty"));
-		}
-		if (!inputString) {
-			return resolve(undefined);
-		}
-		const splitArray = inputString.split(splitParameter);
-		result = [];
-		for (let i = 0; i < splitArray.length; i++) {
-			const splitItem = splitArray[i];
-			createMxObject("NanoflowCommonsITvisors.SplitItem").then(mxObj => {
-				mxObj.set("Index", i);
-				mxObj.set("Value", splitItem);
-				result.push(mxObj);
-			});
-		}
-		return resolve(result);
-	});
+	const createSplitItem = async (splitItem, i) => {
+		mxObj = await createMxObject("NanoflowCommonsITvisors.SplitItem");
+		mxObj.set("Index", i);
+		mxObj.set("Value", splitItem);
+		return mxObj;
+	};
+
+	if (splitParameter === undefined || splitParameter === null || !splitParameter) {
+		return Promise.reject(new Error("StringSplit: splitParameter must not be empty"));
+	}
+	if (!inputString) {
+		return Promise.resolve(undefined);
+	}
+
+	const splitArray = inputString.split(splitParameter);
+	const result = [];
+	for (let i = 0; i < splitArray.length; i++) {
+		const splitItem = splitArray[i];
+		result.push(createSplitItem(splitItem, i));
+	}
+	return Promise.all(result);
 
 	// END USER CODE
 }

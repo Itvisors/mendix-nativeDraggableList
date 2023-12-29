@@ -70,6 +70,7 @@ export class NativeDraggableList extends Component<NativeDraggableListProps<Cust
                 dragStart={this.props.dragStart}
                 onDragEnd={this.onDragEnd}
                 onDropAction={this.props.onDropAction}
+                widgetName={this.props.name}
             />
         );
     }
