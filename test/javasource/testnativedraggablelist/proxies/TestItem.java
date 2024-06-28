@@ -228,13 +228,13 @@ public class TestItem implements com.mendix.systemwideinterfaces.core.IEntityPro
 		getMendixObject().setValue(context, MemberNames.TestCheckbox.toString(), testcheckbox);
 	}
 
-	@Override
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return testItemMendixObject;
 	}
 
-	@Override
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;

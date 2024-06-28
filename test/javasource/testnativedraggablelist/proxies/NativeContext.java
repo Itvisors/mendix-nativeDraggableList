@@ -145,13 +145,13 @@ public class NativeContext implements com.mendix.systemwideinterfaces.core.IEnti
 		getMendixObject().setValue(context, MemberNames.DraggedItemID.toString(), draggeditemid);
 	}
 
-	@Override
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return nativeContextMendixObject;
 	}
 
-	@Override
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;

@@ -145,13 +145,13 @@ public class EntityStatistics implements com.mendix.systemwideinterfaces.core.IE
 		getMendixObject().setValue(context, MemberNames.ObjectCount.toString(), objectcount);
 	}
 
-	@Override
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IMendixObject getMendixObject()
 	{
 		return entityStatisticsMendixObject;
 	}
 
-	@Override
+	@java.lang.Override
 	public final com.mendix.systemwideinterfaces.core.IContext getContext()
 	{
 		return context;

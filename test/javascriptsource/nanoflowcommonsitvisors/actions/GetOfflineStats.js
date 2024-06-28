@@ -32,15 +32,20 @@ export async function GetOfflineStats() {
 				const filter = {limit : 1, offset : 0};
 				mx.data.getOffline(entity, [], filter,
 					function (mxobjs, count) {
-						console.debug(entity + ": " + count);
-						createMxObject("NanoflowCommonsITvisors.EntityStatistics").then(mxObj => {
-							mxObj.set("Entity", entity);
-							mxObj.set("ObjectCount", count);
-							resolve(mxObj);
-						});
+						if (count !== undefined) {
+							// console.info(entity + ": " + count);
+							createMxObject("NanoflowCommonsITvisors.EntityStatistics").then(mxObj => {
+								mxObj.set("Entity", entity);
+								mxObj.set("ObjectCount", count);
+								resolve(mxObj);
+							});
+						} else {
+							// console.info("GetOfflineStats " + entity + " does not exist in the offline database or is non-persistent. Count is undefined");
+							resolve(undefined);
+						}
 					},
 					function () {
-						console.debug("GetOfflineStats " + entity + " does not exist in the offline database or is non-persistent.");
+						// console.info("GetOfflineStats " + entity + " does not exist in the offline database or is non-persistent. Exception from getOffline");
 						resolve(undefined);
 					}
 				);
