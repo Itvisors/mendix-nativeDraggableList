@@ -62,14 +62,14 @@ export async function GetOfflineStats() {
 	// The meta object in the client does not tell whether the entity is persistent or not.
 	// So attempt to get an object count for all entities in the meta object list. 
 	// Note that getMap does not return a real map but an object that contains entity names
-	// As we need to wait on all DB queries to complete we use a promise array.
-	const promiseArray = [];
+	const resultArray = [];
 	for (let entity in mx.meta.getMap()) {
-		promiseArray.push(createStatisticsObject(entity));
+		const statObj = await createStatisticsObject(entity);
+		if (statObj) {
+			resultArray.push(statObj);			
+		}
 	}
-	const resolvedArray = await Promise.all(promiseArray);
 	
-	// Filter out the undefined elements, keeping any entity that has objects in the local database
-	return resolvedArray.filter(resolved => !!resolved);
+	return resultArray;
 	// END USER CODE
 }

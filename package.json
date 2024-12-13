@@ -1,7 +1,7 @@
 {
   "name": "nativedraggablelist",
   "widgetName": "NativeDraggableList",
-  "version": "3.3.0",
+  "version": "4.0.0",
   "description": "Native draggable list",
   "copyright": "ITvisors 2020",
   "author": "Marcel Groeneweg",
@@ -26,7 +26,7 @@
     "@types/big.js": "^6.0.2"
   },
   "dependencies": {
-    "react-native-draggable-flatlist": "^3.0.6"
+    "react-native-draggable-flatlist": "^4.0.1"
   },
   "resolutions": {
     "react": "18.2.0",

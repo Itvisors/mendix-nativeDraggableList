@@ -50,9 +50,10 @@ export class DraggableListContainer extends Component<DraggableListContainerProp
         this.onDragEnd = this.onDragEnd.bind(this);
     }
 
-    renderItem = ({ item, index, drag, isActive }: RenderItemParams<ItemData>): ReactNode => {
+    renderItem = ({ item, getIndex, drag, isActive }: RenderItemParams<ItemData>): ReactNode => {
         const { content, dragHandleContent, dragStart, widgetName } = this.props;
         const dsItem = this.dsItemMap.get(item.itemId);
+        const index = getIndex();
         // console.info("DraggableListContainer.renderItem " + item.itemId + ", active: " + isActive);
         // When one or more items have no id, the list will contain only one item and no datasource items.
         if (!dsItem) {
