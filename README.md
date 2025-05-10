@@ -9,6 +9,7 @@ Native draggable list, allow users to reorder items in a list
 
 ## Limitations
 - Currently pluggable widgets cannot change data in a datasource so the widget sets a JSON string on the context upon drop
+- Unfortunately this widget does not work in Mendix 10.18 thru 10.21 due to React Native library conflicts in the native app template
 
 ## Context entity
 The widget needs a context to place the drop data in. Make sure it has an unlimited string to contain the drop data JSON

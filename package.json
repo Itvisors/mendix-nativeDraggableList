@@ -22,11 +22,11 @@
     "release": "pluggable-widgets-tools release:native"
   },
   "devDependencies": {
-    "@mendix/pluggable-widgets-tools": "^10.18.2",
+    "@mendix/pluggable-widgets-tools": "^10.21.0",
     "@types/big.js": "^6.0.2"
   },
   "dependencies": {
-    "react-native-draggable-flatlist": "^4.0.1"
+    "react-native-draggable-flatlist": "^4.0.3"
   },
   "resolutions": {
     "react": "18.2.0",

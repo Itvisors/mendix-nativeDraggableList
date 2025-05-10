@@ -6,9 +6,9 @@ package system.proxies;
 
 public enum EventStatus
 {
-	Running(new java.lang.String[][] { new java.lang.String[] { "en_US", "Running" }, new java.lang.String[] { "nl_NL", "Bezig" } }),
-	Completed(new java.lang.String[][] { new java.lang.String[] { "en_US", "Completed" }, new java.lang.String[] { "nl_NL", "Voltooid" } }),
-	Error(new java.lang.String[][] { new java.lang.String[] { "en_US", "Error" }, new java.lang.String[] { "nl_NL", "Fout" } }),
+	Running(new java.lang.String[][] { new java.lang.String[] { "en_US", "Running" } }),
+	Completed(new java.lang.String[][] { new java.lang.String[] { "en_US", "Completed" } }),
+	Error(new java.lang.String[][] { new java.lang.String[] { "en_US", "Error" } }),
 	Stopped(new java.lang.String[][] { new java.lang.String[] { "en_US", "Stopped" } });
 
 	private final java.util.Map<java.lang.String, java.lang.String> captions;

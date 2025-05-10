@@ -32,6 +32,8 @@ export interface NativeDraggableListPreviewProps {
     style: string;
     styleObject?: CSSProperties;
     readOnly: boolean;
+    renderMode: "design" | "xray" | "structure";
+    translate: (text: string) => string;
     ds: {} | { caption: string } | { type: string } | null;
     itemIdAttr: string;
     itemSeqNbrAttr: string;

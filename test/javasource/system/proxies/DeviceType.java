@@ -6,9 +6,9 @@ package system.proxies;
 
 public enum DeviceType
 {
-	Phone(new java.lang.String[][] { new java.lang.String[] { "en_US", "Phone" }, new java.lang.String[] { "nl_NL", "Phone" } }),
-	Tablet(new java.lang.String[][] { new java.lang.String[] { "en_US", "Tablet" }, new java.lang.String[] { "nl_NL", "Tablet" } }),
-	Desktop(new java.lang.String[][] { new java.lang.String[] { "en_US", "Desktop" }, new java.lang.String[] { "nl_NL", "Desktop" } });
+	Phone(new java.lang.String[][] { new java.lang.String[] { "en_US", "Phone" } }),
+	Tablet(new java.lang.String[][] { new java.lang.String[] { "en_US", "Tablet" } }),
+	Desktop(new java.lang.String[][] { new java.lang.String[] { "en_US", "Desktop" } });
 
 	private final java.util.Map<java.lang.String, java.lang.String> captions;
 

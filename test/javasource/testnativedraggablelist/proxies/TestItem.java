@@ -49,7 +49,7 @@ public class TestItem implements com.mendix.systemwideinterfaces.core.IEntityPro
 		if (testItemMendixObject == null) {
 			throw new java.lang.IllegalArgumentException("The given object cannot be null.");
 		}
-		if (!com.mendix.core.Core.isSubClassOf(entityName, testItemMendixObject.getType())) {
+		if (!testItemMendixObject.isInstanceOf(entityName)) {
 			throw new java.lang.IllegalArgumentException(String.format("The given object is not a %s", entityName));
 		}	
 
