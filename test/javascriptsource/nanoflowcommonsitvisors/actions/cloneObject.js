@@ -32,7 +32,7 @@ export async function cloneObject(fromObject, toObject) {
 	const attrArray = fromMetaObject.getAttributes();
 	
 	for (const attrName of attrArray) {
-		if (toMetaObject.has(attrName)) {
+		if (toMetaObject.has(attrName) && !toObject.isReadonlyAttr(attrName)) {
 			toObject.set(attrName, fromObject.get(attrName));
 		}
 	}

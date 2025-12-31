@@ -20,45 +20,37 @@ import { Big } from "big.js";
 export async function GetEnumValue(mxObject, enumAttribute, useCaption) {
 	// BEGIN USER CODE
 
-	return new Promise(function(resolve, reject) {
-		var caption,
-			metaData,
-			rejectWithMessage = function (message) {
-				reject("GetEnumCaption: ");
-			},
-			value;
-		try {
-			if (!mxObject) {
-				rejectWithMessage("mxObject not set.");
-				return;
-			}
-			if (!enumAttribute) {
-				rejectWithMessage("enumAttribute not set.");
-				return;
-			}
-			metaData = mx.meta.getEntity(mxObject.getEntity());
-			if (!metaData.has(enumAttribute)) {
-				rejectWithMessage("Attribute " + enumAttribute + " is no attribute of " + mxObject.getEntity());
-			}
-			value = mxObject.get(enumAttribute);
-			if (value === null || value === "") {
-				// Returning null does not work, needs to be undefined
-				resolve(undefined);
+	if (!mxObject) {
+		return Promise.reject("mxObject not set.");
+	}
+	if (!enumAttribute) {
+		return Promise.reject("enumAttribute not set.");
+	}
+
+	try {
+		const metaData = mx.meta.getEntity(mxObject.getEntity());
+		if (!metaData.has(enumAttribute)) {
+			return Promise.reject("Attribute " + enumAttribute + " is no attribute of " + mxObject.getEntity());
+		}
+		value = mxObject.get(enumAttribute);
+		if (value === null || value === "") {
+			// Returning null does not work, needs to be undefined
+			return undefined;
+		} else {
+			if (useCaption) {
+				caption = mxObject.getEnumCaption(enumAttribute, value);
+				return caption;
 			} else {
-				if (useCaption) {
-					caption = mxObject.getEnumCaption(enumAttribute, value);
-					resolve(caption);
-				} else {
-					resolve(value);
-				}
-			}
-		} catch (error) {
-			if (error && error.message) {
-				reject("GetEnumCaption failed: " + error.message);
-			} else {
-				reject("GetEnumCaption failed.");
+				return value;
 			}
 		}
-	});
+	} catch (error) {
+		if (error && error.message) {
+			return Promise.reject("GetEnumCaption failed: " + error.message);
+		} else {
+			return Promise.reject("GetEnumCaption failed.");
+		}
+	}
+
 	// END USER CODE
 }

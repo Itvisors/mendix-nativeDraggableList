@@ -6,27 +6,25 @@ package nanoflowcommonsitvisors.proxies;
 
 public enum ResultType
 {
-	First(new java.lang.String[][] { new java.lang.String[] { "en_US", "First" } }),
-	List(new java.lang.String[][] { new java.lang.String[] { "en_US", "List" } }),
-	Count(new java.lang.String[][] { new java.lang.String[] { "en_US", "Count" } });
+	First("2851f507-c391-4606-9a0b-b29ad917af80"),
+	List("5d9ba0c5-65a3-4cff-9696-9f9f0f0780a5"),
+	Count("0a01a250-1441-4a25-907f-17744f59941e");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private ResultType(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private ResultType(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }

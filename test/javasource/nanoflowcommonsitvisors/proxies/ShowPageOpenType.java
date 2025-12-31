@@ -6,27 +6,25 @@ package nanoflowcommonsitvisors.proxies;
 
 public enum ShowPageOpenType
 {
-	content(new java.lang.String[][] { new java.lang.String[] { "en_US", "content" } }),
-	popup(new java.lang.String[][] { new java.lang.String[] { "en_US", "popup" } }),
-	modal(new java.lang.String[][] { new java.lang.String[] { "en_US", "modal" } });
+	content("2d008d30-e9e1-4cb2-bbce-1d3b401d5c76"),
+	popup("e980e60f-b4b0-4988-84b7-9adf59ba8d8c"),
+	modal("f6144044-e93c-4427-ac0e-dc15aeb3dea6");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private ShowPageOpenType(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private ShowPageOpenType(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }

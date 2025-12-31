@@ -63,20 +63,3 @@ export function checkDateConstraintsFull(constraints, entityToReturn) {
 		}
 	}
 }
-
-export async function createMxObject(entityName) {
-	return new Promise((resolve, reject) => {
-		mx.data.create({
-			entity: entityName,
-			callback:  (mxObject) => {
-				resolve(mxObject);
-			},
-			error: (e) => {
-				reject("Could not create '" + entityName + "': " + e.message);
-			}
-		});
-
-	});
-}
-
-

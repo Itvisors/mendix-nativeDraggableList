@@ -21,15 +21,15 @@ import { addConstraint, addSort, checkDateConstraintsBasic } from "../NanoflowCo
  * 
  * @param {string} entityToReturn
  * @param {string} attribute1 - The attribute (or reference) to constrain on
- * @param {"NanoflowCommonsITvisors.GetOfflineOperator.equals"|"NanoflowCommonsITvisors.GetOfflineOperator.lessThan"|"NanoflowCommonsITvisors.GetOfflineOperator.lessThanOrEquals"|"NanoflowCommonsITvisors.GetOfflineOperator.greaterThan"|"NanoflowCommonsITvisors.GetOfflineOperator.greaterThanOrEquals"|"NanoflowCommonsITvisors.GetOfflineOperator.contains"} operator1 - One of equals (default), lessThan, lessThanOrEquals, greatherThan, greaterThanOrEquals, contains
+ * @param {undefined|"equals"|"lessThan"|"lessThanOrEquals"|"greaterThan"|"greaterThanOrEquals"|"contains"} operator1 - One of equals (default), lessThan, lessThanOrEquals, greatherThan, greaterThanOrEquals, contains
  * @param {string} value1 - The value to constrain on, for associations this is the GUID. Use DateTimeToMilliseconds to get the correct value to use for date constraints.
  * @param {boolean} negate1 - If true, return the objects not matching the constraint.
  * @param {string} attribute2
- * @param {"NanoflowCommonsITvisors.GetOfflineOperator.equals"|"NanoflowCommonsITvisors.GetOfflineOperator.lessThan"|"NanoflowCommonsITvisors.GetOfflineOperator.lessThanOrEquals"|"NanoflowCommonsITvisors.GetOfflineOperator.greaterThan"|"NanoflowCommonsITvisors.GetOfflineOperator.greaterThanOrEquals"|"NanoflowCommonsITvisors.GetOfflineOperator.contains"} operator2
+ * @param {undefined|"equals"|"lessThan"|"lessThanOrEquals"|"greaterThan"|"greaterThanOrEquals"|"contains"} operator2
  * @param {string} value2
  * @param {boolean} negate2
  * @param {string} attribute3
- * @param {"NanoflowCommonsITvisors.GetOfflineOperator.equals"|"NanoflowCommonsITvisors.GetOfflineOperator.lessThan"|"NanoflowCommonsITvisors.GetOfflineOperator.lessThanOrEquals"|"NanoflowCommonsITvisors.GetOfflineOperator.greaterThan"|"NanoflowCommonsITvisors.GetOfflineOperator.greaterThanOrEquals"|"NanoflowCommonsITvisors.GetOfflineOperator.contains"} operator3
+ * @param {undefined|"equals"|"lessThan"|"lessThanOrEquals"|"greaterThan"|"greaterThanOrEquals"|"contains"} operator3
  * @param {string} value3
  * @param {boolean} negate3
  * @param {string} sort1

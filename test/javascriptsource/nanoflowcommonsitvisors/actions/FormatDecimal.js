@@ -20,31 +20,29 @@ import { Big } from "big.js";
  */
 export async function FormatDecimal(decimalToFormat, numberOfDecimals, thousandSeparators) {
 	// BEGIN USER CODE
-	return new Promise(function(resolve, reject) {
-		var formattedDecimal,
-			props;
-		if (typeof decimalToFormat !== "undefined" && decimalToFormat !== null) {
-			if (typeof numberOfDecimals !== "undefined" && numberOfDecimals !== null) {
-				try {
-					props = {
-						places: Number(numberOfDecimals.toFixed()),
-						groups: (typeof thousandSeparators !== "undefined" && thousandSeparators)
-					};
-					formattedDecimal = mx.parser.formatValue(decimalToFormat, "decimal", props);
-					resolve(formattedDecimal);
-				} catch (error) {
-					if (error && error.message) {
-						reject("FormatDecimal failed: " + error.message);
-					} else {
-						reject("FormatDecimal failed.");
-					}
-				}
-			} else {
-				reject("FormatDecimal: No number of decimals specified");
-			}
+
+	if (!decimalToFormat) {
+		return "";
+	}
+
+	if (typeof numberOfDecimals === "undefined" || numberOfDecimals === null) {
+		return Promise.reject("FormatDecimal: No number of decimals specified");
+	}
+
+	try {
+		const props = {
+			places: Number(numberOfDecimals.toFixed()),
+			groups: (typeof thousandSeparators !== "undefined" && thousandSeparators)
+		};
+		const formattedDecimal = mx.parser.formatValue(decimalToFormat, "decimal", props);
+		return formattedDecimal;
+	} catch (error) {
+		if (error && error.message) {
+			return Promise.reject("FormatDecimal failed: " + error.message);
 		} else {
-			resolve("");
+			return Promise.reject("FormatDecimal failed.");
 		}
-	});
+	}
+
 	// END USER CODE
 }

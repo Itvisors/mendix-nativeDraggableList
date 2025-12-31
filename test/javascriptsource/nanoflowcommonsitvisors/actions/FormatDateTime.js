@@ -19,26 +19,24 @@ import { Big } from "big.js";
  */
 export async function FormatDateTime(dateToFormat, formatToUse) {
 	// BEGIN USER CODE
-	return new Promise(function(resolve, reject) {
-		var formattedDate;
-		if (typeof dateToFormat !== "undefined" && dateToFormat !== null) {
-			if (typeof formatToUse !== "undefined" && formatToUse !== null && formatToUse) {
-				try {
-					formattedDate = mx.parser.formatValue(dateToFormat, "datetime", { datePattern: formatToUse});
-					resolve(formattedDate);
-				} catch (error) {
-					if (error && error.message) {
-						reject("FormatDateTime failed: " + error.message);
-					} else {
-						reject("FormatDateTime failed.");
-					}
-				}
-			} else {
-				reject("FormatDateTime: No format specified");
-			}
+	if (!dateToFormat ) {
+		return "";
+	}
+
+	if (!formatToUse ) {
+		return Promise.reject("FormatDateTime: No format specified");
+	}
+
+	try {
+		formattedDate = mx.parser.formatValue(dateToFormat, "datetime", { datePattern: formatToUse});
+		return formattedDate;
+	} catch (error) {
+		if (error && error.message) {
+			return Promise.reject("FormatDateTime failed: " + error.message);
 		} else {
-			resolve("");
+			return Promise.reject("FormatDateTime failed.");
 		}
-	});
+	}
+
 	// END USER CODE
 }

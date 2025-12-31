@@ -6,30 +6,28 @@ package nanoflowcommonsitvisors.proxies;
 
 public enum GetOfflineOperator
 {
-	equals(new java.lang.String[][] { new java.lang.String[] { "en_US", "Equals" } }),
-	lessThan(new java.lang.String[][] { new java.lang.String[] { "en_US", "Less than" } }),
-	lessThanOrEquals(new java.lang.String[][] { new java.lang.String[] { "en_US", "Less than or equals" } }),
-	greaterThan(new java.lang.String[][] { new java.lang.String[] { "en_US", "Greater than" } }),
-	greaterThanOrEquals(new java.lang.String[][] { new java.lang.String[] { "en_US", "Greater than or equals" } }),
-	contains(new java.lang.String[][] { new java.lang.String[] { "en_US", "Contains" } });
+	equals("58983098-7f5b-4d2e-957c-d0d345066315"),
+	lessThan("e44027d2-ac42-475f-862e-d5e584c79c1d"),
+	lessThanOrEquals("8c46d394-c7fe-4e0a-80da-02d0ce0722d8"),
+	greaterThan("fcb49837-9a2a-4146-a659-f6da8f35dfdb"),
+	greaterThanOrEquals("3963d34a-1062-4879-870c-40c64a887250"),
+	contains("b965368b-1a0c-4363-bef1-c19099faa704");
 
-	private final java.util.Map<java.lang.String, java.lang.String> captions;
-
-	private GetOfflineOperator(java.lang.String[][] captionStrings)
+	private final java.lang.String i18nCaptionKey;
+	
+	private GetOfflineOperator(java.lang.String i18nCaptionKey)
 	{
-		this.captions = new java.util.HashMap<>();
-		for (java.lang.String[] captionString : captionStrings) {
-			captions.put(captionString[0], captionString[1]);
-		}
+		this.i18nCaptionKey = i18nCaptionKey;
 	}
 
 	public java.lang.String getCaption(java.lang.String languageCode)
 	{
-		return captions.getOrDefault(languageCode, "en_US");
+		String caption = com.mendix.core.Core.getInternationalizedString(languageCode, i18nCaptionKey);
+		return caption.isEmpty() ? getCaption() : caption;
 	}
 
 	public java.lang.String getCaption()
 	{
-		return captions.get("en_US");
+		return com.mendix.core.Core.getInternationalizedString("en_US", i18nCaptionKey);
 	}
 }

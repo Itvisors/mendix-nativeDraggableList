@@ -7,11 +7,9 @@
 // Other code you write will be lost the next time you deploy the project.
 import "mx-global";
 import { Big } from "big.js";
+import { create } from "mx-api/data";
 
 // BEGIN EXTRA CODE
-
-import { createMxObject } from "../NanoflowCommonsITvisorsUtils";
-
 // END EXTRA CODE
 
 /**
@@ -25,7 +23,7 @@ export async function StringSplit(inputString, splitParameter) {
 	// BEGIN USER CODE
 
 	const createSplitItem = async (splitItem, i) => {
-		mxObj = await createMxObject("NanoflowCommonsITvisors.SplitItem");
+		mxObj = await create({entity: "NanoflowCommonsITvisors.SplitItem"});
 		mxObj.set("Index", i);
 		mxObj.set("Value", splitItem);
 		return mxObj;
