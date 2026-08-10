@@ -1,4 +1,4 @@
-import { Component, ReactNode, createElement } from "react";
+import { Component, ReactNode } from "react";
 import { EditableValue } from "mendix";
 import { TextStyle, ViewStyle } from "react-native";
 

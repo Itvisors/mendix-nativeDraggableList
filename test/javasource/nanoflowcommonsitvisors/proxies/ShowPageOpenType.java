@@ -6,9 +6,9 @@ package nanoflowcommonsitvisors.proxies;
 
 public enum ShowPageOpenType
 {
-	content("2d008d30-e9e1-4cb2-bbce-1d3b401d5c76"),
-	popup("e980e60f-b4b0-4988-84b7-9adf59ba8d8c"),
-	modal("f6144044-e93c-4427-ac0e-dc15aeb3dea6");
+	content("ffe74067-41a0-49fc-82e9-ed5178ec0198"),
+	popup("3146f751-d1c6-4e92-b875-2a8a8ad244f2"),
+	modal("5bc20d08-0267-499e-9212-aca7c98b7771");
 
 	private final java.lang.String i18nCaptionKey;
 	

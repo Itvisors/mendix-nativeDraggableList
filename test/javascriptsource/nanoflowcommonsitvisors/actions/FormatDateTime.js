@@ -9,6 +9,9 @@ import "mx-global";
 import { Big } from "big.js";
 
 // BEGIN EXTRA CODE
+
+import { formatValue } from "mx-api/parser";
+
 // END EXTRA CODE
 
 /**
@@ -28,7 +31,7 @@ export async function FormatDateTime(dateToFormat, formatToUse) {
 	}
 
 	try {
-		formattedDate = mx.parser.formatValue(dateToFormat, "datetime", { datePattern: formatToUse});
+		formattedDate = formatValue(dateToFormat, "DateTime", { datePattern: formatToUse});
 		return formattedDate;
 	} catch (error) {
 		if (error && error.message) {

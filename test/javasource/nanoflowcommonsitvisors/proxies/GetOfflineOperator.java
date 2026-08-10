@@ -6,12 +6,12 @@ package nanoflowcommonsitvisors.proxies;
 
 public enum GetOfflineOperator
 {
-	equals("58983098-7f5b-4d2e-957c-d0d345066315"),
-	lessThan("e44027d2-ac42-475f-862e-d5e584c79c1d"),
-	lessThanOrEquals("8c46d394-c7fe-4e0a-80da-02d0ce0722d8"),
-	greaterThan("fcb49837-9a2a-4146-a659-f6da8f35dfdb"),
-	greaterThanOrEquals("3963d34a-1062-4879-870c-40c64a887250"),
-	contains("b965368b-1a0c-4363-bef1-c19099faa704");
+	equals("e3704fa6-cc22-47ca-9476-e13956602090"),
+	lessThan("2e3375cc-7eb7-491d-86cf-e5d33ef25825"),
+	lessThanOrEquals("81b4d7a4-dc0e-4e03-b3ce-7d3fceeb0ad3"),
+	greaterThan("23796b5b-c618-49a7-98f1-e1a9b22f9c85"),
+	greaterThanOrEquals("f68395ba-6918-4759-963a-f1239d13b576"),
+	contains("561d2115-f578-49dc-8ffd-0b0e14b42953");
 
 	private final java.lang.String i18nCaptionKey;
 	

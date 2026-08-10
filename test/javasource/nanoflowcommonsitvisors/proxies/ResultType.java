@@ -6,9 +6,9 @@ package nanoflowcommonsitvisors.proxies;
 
 public enum ResultType
 {
-	First("2851f507-c391-4606-9a0b-b29ad917af80"),
-	List("5d9ba0c5-65a3-4cff-9696-9f9f0f0780a5"),
-	Count("0a01a250-1441-4a25-907f-17744f59941e");
+	First("7dca8379-6ba5-4208-8ecf-add7199961bc"),
+	List("4b4b12fc-1edd-4602-b6eb-745af9ef1d73"),
+	Count("49700988-cfb9-464c-b67d-6e29da62e233");
 
 	private final java.lang.String i18nCaptionKey;
 	

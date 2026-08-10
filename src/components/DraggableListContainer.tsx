@@ -1,4 +1,4 @@
-import { Component, ReactNode, createElement } from "react";
+import { Component, ReactNode } from "react";
 import { ActionValue, ListValue, ListAttributeValue, ListWidgetValue, ObjectItem, ValueStatus } from "mendix";
 import { Text, View } from "react-native";
 

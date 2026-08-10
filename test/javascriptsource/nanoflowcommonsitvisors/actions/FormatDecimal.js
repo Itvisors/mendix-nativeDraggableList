@@ -9,6 +9,9 @@ import "mx-global";
 import { Big } from "big.js";
 
 // BEGIN EXTRA CODE
+
+import { formatValue } from "mx-api/parser";
+
 // END EXTRA CODE
 
 /**
@@ -34,7 +37,7 @@ export async function FormatDecimal(decimalToFormat, numberOfDecimals, thousandS
 			places: Number(numberOfDecimals.toFixed()),
 			groups: (typeof thousandSeparators !== "undefined" && thousandSeparators)
 		};
-		const formattedDecimal = mx.parser.formatValue(decimalToFormat, "decimal", props);
+		const formattedDecimal = formatValue(decimalToFormat, "Decimal", props);
 		return formattedDecimal;
 	} catch (error) {
 		if (error && error.message) {
