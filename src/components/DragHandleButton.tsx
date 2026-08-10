@@ -1,4 +1,4 @@
-import React, { ReactElement, createElement } from "react";
+import React, { ReactElement } from "react";
 import { Pressable } from "react-native";
 import { DragStartEnum } from "../../typings/NativeDraggableListProps";
 
